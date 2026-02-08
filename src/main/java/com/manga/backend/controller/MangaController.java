@@ -1,0 +1,76 @@
+package com.manga.backend.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.manga.backend.dto.MangaDto;
+import com.manga.backend.model.Manga;
+import com.manga.backend.service.MangaService;
+
+@RestController
+@RequestMapping("/mangas")
+public class MangaController {
+
+    MangaService mangaService;
+
+    public MangaController(MangaService mangaService) {
+        this.mangaService = mangaService;
+    }
+
+    @GetMapping
+    public List<MangaDto> obtenerTodos() {
+
+        return mangaService.obtenerTodos()
+                .stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MangaDto> obtenerPorId(@PathVariable Long id) {
+        return mangaService.obtenerPorId(id)
+                .map(manga -> ResponseEntity.ok(toDto(manga)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<MangaDto> crearManga(@RequestBody MangaDto request) {
+        Manga manga = mangaService.crearManga(request);
+        return ResponseEntity.status(201).body(toDto(manga));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MangaDto> actualizarManga(@PathVariable Long id, @RequestBody MangaDto request) {
+        return mangaService.actualizarManga(id, request)
+                .map(manga -> ResponseEntity.ok(toDto(manga)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> borrarManga(@PathVariable Long id) {
+        boolean borrado = mangaService.borrarManga(id);
+        if (!borrado) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    private MangaDto toDto(Manga manga) {
+        return new MangaDto(
+                manga.getId(),
+                manga.getAutor(),
+                manga.getTitulo(),
+                manga.getDescripcion(),
+                manga.getEstado(),
+                manga.getFechaAlta());
+    }
+}
