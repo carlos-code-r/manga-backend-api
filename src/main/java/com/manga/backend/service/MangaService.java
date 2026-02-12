@@ -1,8 +1,9 @@
 package com.manga.backend.service;
 
-import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.manga.backend.dto.MangaDto;
@@ -18,8 +19,8 @@ public class MangaService {
         this.mangaRepository = mangaRepository;
     }
 
-    public List<Manga> obtenerTodos() {
-        return mangaRepository.findAll();
+    public Page<Manga> obtenerTodos(Pageable pageable) {
+        return mangaRepository.findAll(pageable);
     }
 
     public Optional<Manga> obtenerPorId(Long id) {

@@ -1,7 +1,8 @@
 package com.manga.backend.controller;
 
-import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +28,10 @@ public class MangaController {
     }
 
     @GetMapping
-    public List<MangaDto> obtenerTodos() {
+    public Page<MangaDto> obtenerTodos(Pageable pageable) {
 
-        return mangaService.obtenerTodos()
-                .stream()
-                .map(this::toDto)
-                .toList();
+        return mangaService.obtenerTodos(pageable)
+                .map(this::toDto);
     }
 
     @GetMapping("/{id}")
