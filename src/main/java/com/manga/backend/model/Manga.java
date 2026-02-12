@@ -30,6 +30,6 @@ public class Manga {
     private String descripcion;
     @Enumerated(EnumType.STRING)
     private EstadoManga estado;
-    private LocalDate fechaAlta;
+    private LocalDate fechaPublicacion;
 
 }

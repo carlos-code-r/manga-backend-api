@@ -20,7 +20,7 @@ import com.manga.backend.service.MangaService;
 @RequestMapping("/mangas")
 public class MangaController {
 
-    MangaService mangaService;
+  private final  MangaService mangaService;
 
     public MangaController(MangaService mangaService) {
         this.mangaService = mangaService;
@@ -67,10 +67,10 @@ public class MangaController {
     private MangaDto toDto(Manga manga) {
         return new MangaDto(
                 manga.getId(),
-                manga.getAutor(),
                 manga.getTitulo(),
+                manga.getAutor(),
                 manga.getDescripcion(),
                 manga.getEstado(),
-                manga.getFechaAlta());
+                manga.getFechaPublicacion());
     }
 }

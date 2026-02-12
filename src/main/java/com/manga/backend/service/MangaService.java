@@ -12,7 +12,7 @@ import com.manga.backend.repository.MangaRepository;
 @Service
 public class MangaService {
 
-    public final MangaRepository mangaRepository;
+    private final MangaRepository mangaRepository;
 
     public MangaService(MangaRepository mangaRepository) {
         this.mangaRepository = mangaRepository;
@@ -32,7 +32,7 @@ public class MangaService {
         manga.setTitulo(dto.getTitulo());
         manga.setDescripcion(dto.getDescripcion());
         manga.setEstado(dto.getEstado());
-        manga.setFechaAlta(dto.getFechaAlta());
+        manga.setFechaPublicacion(dto.getFechaPublicacion());
         return mangaRepository.save(manga);
     }
 
@@ -42,7 +42,7 @@ public class MangaService {
             manga.setTitulo(dto.getTitulo());
             manga.setDescripcion(dto.getDescripcion());
             manga.setEstado(dto.getEstado());
-            manga.setFechaAlta(dto.getFechaAlta());
+            manga.setFechaPublicacion(dto.getFechaPublicacion()   );
             return mangaRepository.save(manga);
         });
     }

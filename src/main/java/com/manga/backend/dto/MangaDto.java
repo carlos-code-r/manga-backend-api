@@ -18,5 +18,5 @@ public class MangaDto {
     private String autor;
     private String descripcion;
     private EstadoManga estado;
-    private LocalDate fechaAlta;
+    private LocalDate fechaPublicacion;
 }
