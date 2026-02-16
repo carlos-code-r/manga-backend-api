@@ -14,7 +14,7 @@ import com.manga.backend.repository.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-    final private UsuarioRepository usuarioRepository;
+    private final  UsuarioRepository usuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
