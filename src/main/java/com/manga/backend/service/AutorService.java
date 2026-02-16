@@ -14,34 +14,44 @@ import com.manga.backend.repository.AutorRepository;
 public class AutorService {
 
     private final AutorRepository autorRepository;
-    public AutorService(AutorRepository autorRepository){
-        this.autorRepository=autorRepository;
+
+    public AutorService(AutorRepository autorRepository) {
+        this.autorRepository = autorRepository;
     }
-    public Page <Autor> obtenerTodos(Pageable pageable){
+
+    public Page<Autor> obtenerTodos(Pageable pageable) {
+
         return autorRepository.findAll(pageable);
     }
-    public Optional <Autor> obtenerPorId(Long id){
+
+    public Optional<Autor> obtenerPorId(Long id) {
+
         return autorRepository.findById(id);
     }
-    public Autor crearAutor(AutorDto dto){
-        Autor autor=new Autor();
+
+    public Autor crearAutor(AutorDto dto) {
+
+        Autor autor = new Autor();
         autor.setNombre(dto.getNombre());
         autor.setNacionalidad(dto.getNacionalidad());
         autor.setFechaNacimiento(dto.getFechaNacimiento());
         autor.setAutobiografia(dto.getAutobiografia());
         return autorRepository.save(autor);
-}
-    public Optional <Autor> actualizarAutor(Long id, AutorDto dto){
-        return autorRepository.findById(id).map(autor->{
+    }
+
+    public Optional<Autor> actualizarAutor(Long id, AutorDto dto) {
+        
+        return autorRepository.findById(id).map(autor -> {
             autor.setNombre(dto.getNombre());
-        autor.setNacionalidad(dto.getNacionalidad());
-        autor.setFechaNacimiento(dto.getFechaNacimiento());
-        autor.setAutobiografia(dto.getAutobiografia());
-        return autorRepository.save(autor);
+            autor.setNacionalidad(dto.getNacionalidad());
+            autor.setFechaNacimiento(dto.getFechaNacimiento());
+            autor.setAutobiografia(dto.getAutobiografia());
+            return autorRepository.save(autor);
         });
     }
-    public boolean borrarAutor(Long id){
-        if(!autorRepository.existsById(id)){
+
+    public boolean borrarAutor(Long id) {
+        if (!autorRepository.existsById(id)) {
             return false;
         }
         autorRepository.deleteById(id);
