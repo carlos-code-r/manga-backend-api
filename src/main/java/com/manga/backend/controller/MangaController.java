@@ -67,7 +67,6 @@ public class MangaController {
         return new MangaDto(
                 manga.getId(),
                 manga.getTitulo(),
-                manga.getAutor(),
                 manga.getDescripcion(),
                 manga.getEstado(),
                 manga.getFechaPublicacion());

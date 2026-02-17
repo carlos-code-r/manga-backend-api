@@ -29,7 +29,6 @@ public class MangaService {
 
     public Manga crearManga(MangaDto dto) {
         Manga manga = new Manga();
-        manga.setAutor(dto.getAutor());
         manga.setTitulo(dto.getTitulo());
         manga.setDescripcion(dto.getDescripcion());
         manga.setEstado(dto.getEstado());
@@ -39,7 +38,6 @@ public class MangaService {
 
     public Optional<Manga> actualizarManga(Long id, MangaDto dto) {
         return mangaRepository.findById(id).map(manga -> {
-            manga.setAutor(dto.getAutor());
             manga.setTitulo(dto.getTitulo());
             manga.setDescripcion(dto.getDescripcion());
             manga.setEstado(dto.getEstado());

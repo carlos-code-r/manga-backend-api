@@ -15,7 +15,6 @@ public class MangaDto {
 
     private Long id;
     private String titulo;
-    private String autor;
     private String descripcion;
     private EstadoManga estado;
     private LocalDate fechaPublicacion;
