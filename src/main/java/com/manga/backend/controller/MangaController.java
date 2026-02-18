@@ -69,6 +69,7 @@ public class MangaController {
                 manga.getTitulo(),
                 manga.getDescripcion(),
                 manga.getEstado(),
-                manga.getFechaPublicacion());
+                manga.getFechaPublicacion(),
+                manga.getAutor());
     }
 }
