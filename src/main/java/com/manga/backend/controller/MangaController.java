@@ -64,12 +64,16 @@ public class MangaController {
     }
 
     private MangaDto toDto(Manga manga) {
+        Long autorId=null;
+        if(manga.getAutor() !=null){
+            autorId=manga.getAutor().getId();
+        }
         return new MangaDto(
                 manga.getId(),
                 manga.getTitulo(),
                 manga.getDescripcion(),
                 manga.getEstado(),
                 manga.getFechaPublicacion(),
-                manga.getAutor());
+                autorId);
     }
 }

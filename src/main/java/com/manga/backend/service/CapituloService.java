@@ -8,14 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.manga.backend.dto.CapituloDto;
 import com.manga.backend.model.Capitulo;
+import com.manga.backend.model.Manga;
 import com.manga.backend.repository.CapituloRepository;
+import com.manga.backend.repository.MangaRepository;
 @Service
 public class CapituloService {
 
     private final CapituloRepository capituloRepository;
+    private final MangaRepository mangaRepository;
     
-    public CapituloService(CapituloRepository capituloRepository){
+    public CapituloService(CapituloRepository capituloRepository, MangaRepository mangaRepository){
         this.capituloRepository=capituloRepository;
+        this.mangaRepository=mangaRepository;
     }
     public Page <Capitulo> obtenerTodos(Pageable pageable){
         return capituloRepository.findAll(pageable);
@@ -24,10 +28,15 @@ public class CapituloService {
         return capituloRepository.findById(id);
     }
     public Capitulo crearCapitulo(CapituloDto dto){
+
+        Manga manga=mangaRepository.findById(dto.getMangaId())
+        .orElseThrow(()-> new RuntimeException("Manga no encontrado"));
+        
         Capitulo capitulo=new Capitulo();
         capitulo.setTitulo(dto.getTitulo());
         capitulo.setNumeroCapitulo(dto.getNumeroCapitulo());
         capitulo.setFechaPublicacion(dto.getFechaPublicacion());
+        capitulo.setManga(manga);
         return capituloRepository.save(capitulo);
     }
     public Optional <Capitulo> actualizarCapitulo(Long id, CapituloDto dto){

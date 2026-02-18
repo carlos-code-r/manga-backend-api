@@ -35,6 +35,7 @@ public class MangaService {
 
         Autor autor=autorRepository.findById(dto.getAutorId())
         .orElseThrow(()-> new RuntimeException("Autor no encotrado"));
+        
         Manga manga = new Manga();
         manga.setTitulo(dto.getTitulo());
         manga.setDescripcion(dto.getDescripcion());

@@ -55,10 +55,15 @@ public class CapituloController {
         return ResponseEntity.noContent().build();
     }
     private CapituloDto toDto(Capitulo capitulo){
+         Long mangaId=null;
+         if(capitulo.getManga() !=null){
+            mangaId=capitulo.getManga().getId();
+         }
     return new CapituloDto(
         capitulo.getId(),
         capitulo.getNumeroCapitulo(),
         capitulo.getTitulo(),
-        capitulo.getFechaPublicacion());        
+        capitulo.getFechaPublicacion(),
+        mangaId);        
     }
 }
