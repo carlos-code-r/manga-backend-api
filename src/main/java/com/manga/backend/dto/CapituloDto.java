@@ -16,5 +16,5 @@ public class CapituloDto {
     private Integer numeroCapitulo;
     private String titulo;
     private LocalDate fechaPublicacion;
-    private Long MangaId;
+    private Long mangaId;
 }

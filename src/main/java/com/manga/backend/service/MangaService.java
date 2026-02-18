@@ -20,7 +20,7 @@ public class MangaService {
 
     public MangaService(MangaRepository mangaRepository, AutorRepository autorRepository) {
         this.mangaRepository = mangaRepository;
-        this.autorRepository=autorRepository;
+        this.autorRepository = autorRepository;
     }
 
     public Page<Manga> obtenerTodos(Pageable pageable) {
@@ -33,9 +33,9 @@ public class MangaService {
 
     public Manga crearManga(MangaDto dto) {
 
-        Autor autor=autorRepository.findById(dto.getAutorId())
-        .orElseThrow(()-> new RuntimeException("Autor no encotrado"));
-        
+        Autor autor = autorRepository.findById(dto.getAutorId())
+                .orElseThrow(() -> new RuntimeException("Autor no encotrado"));
+
         Manga manga = new Manga();
         manga.setTitulo(dto.getTitulo());
         manga.setDescripcion(dto.getDescripcion());
@@ -50,7 +50,13 @@ public class MangaService {
             manga.setTitulo(dto.getTitulo());
             manga.setDescripcion(dto.getDescripcion());
             manga.setEstado(dto.getEstado());
-            manga.setFechaPublicacion(dto.getFechaPublicacion()   );
+            manga.setFechaPublicacion(dto.getFechaPublicacion());
+
+            if (dto.getAutorId() != null) {
+                Autor autor = autorRepository.findById(dto.getAutorId())
+                        .orElseThrow(() -> new RuntimeException("Autor no encontrado"));
+                manga.setAutor(autor);
+            }
             return mangaRepository.save(manga);
         });
     }

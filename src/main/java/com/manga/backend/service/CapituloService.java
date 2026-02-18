@@ -45,6 +45,11 @@ public class CapituloService {
              capitulo.setTitulo(dto.getTitulo());
         capitulo.setNumeroCapitulo(dto.getNumeroCapitulo());
         capitulo.setFechaPublicacion(dto.getFechaPublicacion());
+        if(dto.getMangaId() !=null){
+            Manga manga=mangaRepository.findById(dto.getMangaId())
+            .orElseThrow(()->new RuntimeException("Manga no encontrado"));
+            capitulo.setManga(manga);
+        }
         return capituloRepository.save(capitulo);
         });
     }
