@@ -16,6 +16,8 @@ import com.manga.backend.dto.AutorDto;
 import com.manga.backend.model.Autor;
 import com.manga.backend.service.AutorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/autores")
 public class AutorController {
@@ -43,14 +45,14 @@ public class AutorController {
     }
 
     @PostMapping
-    public ResponseEntity<AutorDto> crearAutor(@RequestBody AutorDto request) {
+    public ResponseEntity<AutorDto> crearAutor(@Valid @RequestBody AutorDto request) {
 
         Autor autor = autorService.crearAutor(request);
         return ResponseEntity.status(201).body(toDto(autor));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AutorDto> actualizarAutor(@PathVariable Long id, @RequestBody AutorDto dto) {
+    public ResponseEntity<AutorDto> actualizarAutor(@PathVariable Long id,@Valid @RequestBody AutorDto dto) {
 
         return autorService.actualizarAutor(id, dto)
                 .map(autor -> ResponseEntity.ok(toDto(autor)))

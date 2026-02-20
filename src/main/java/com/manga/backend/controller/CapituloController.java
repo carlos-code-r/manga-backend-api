@@ -16,6 +16,8 @@ import com.manga.backend.dto.CapituloDto;
 import com.manga.backend.model.Capitulo;
 import com.manga.backend.service.CapituloService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/capitulos")
 public class CapituloController {
@@ -36,12 +38,12 @@ public class CapituloController {
         .orElse(ResponseEntity.notFound().build());
     }
     @PostMapping
-    public ResponseEntity <CapituloDto> crearCapitulo(@RequestBody CapituloDto request){
+    public ResponseEntity <CapituloDto> crearCapitulo(@Valid@RequestBody CapituloDto request){
         Capitulo capitulo=capituloService.crearCapitulo(request);
         return ResponseEntity.status(201).body(toDto(capitulo));
     }
     @PutMapping("/{id}")
-    public ResponseEntity <CapituloDto> actualizarCapitulo(@PathVariable Long id, @RequestBody CapituloDto request){
+    public ResponseEntity <CapituloDto> actualizarCapitulo(@PathVariable Long id,@Valid @RequestBody CapituloDto request){
         return capituloService.actualizarCapitulo(id, request)
         .map(capitulo->ResponseEntity.ok(toDto(capitulo)))
         .orElse(ResponseEntity.notFound().build());

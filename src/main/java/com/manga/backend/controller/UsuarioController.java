@@ -16,6 +16,8 @@ import com.manga.backend.dto.UsuarioDto;
 import com.manga.backend.model.Usuario;
 import com.manga.backend.service.UsuarioService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -40,13 +42,13 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDto> crearUsuario(@RequestBody UsuarioDto request) {
+    public ResponseEntity<UsuarioDto> crearUsuario(@Valid @RequestBody UsuarioDto request) {
         Usuario usuario = usuarioService.crearUsuario(request);
         return ResponseEntity.status(201).body(toDto(usuario));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioDto> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDto dto) {
+    public ResponseEntity<UsuarioDto> actualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioDto dto) {
         return usuarioService.actualizarUsuario(id, dto)
                 .map(usuario -> ResponseEntity.ok(toDto(usuario)))
                 .orElse(ResponseEntity.notFound().build());

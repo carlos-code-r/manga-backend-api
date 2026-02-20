@@ -17,6 +17,8 @@ import com.manga.backend.dto.MangaDto;
 import com.manga.backend.model.Manga;
 import com.manga.backend.service.MangaService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/mangas")
 public class MangaController {
@@ -42,13 +44,13 @@ public class MangaController {
     }
 
     @PostMapping
-    public ResponseEntity<MangaDto> crearManga(@RequestBody MangaDto request) {
+    public ResponseEntity<MangaDto> crearManga(@Valid @RequestBody MangaDto request) {
         Manga manga = mangaService.crearManga(request);
         return ResponseEntity.status(201).body(toDto(manga));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MangaDto> actualizarManga(@PathVariable Long id, @RequestBody MangaDto request) {
+    public ResponseEntity<MangaDto> actualizarManga(@PathVariable Long id,@Valid @RequestBody MangaDto request) {
         return mangaService.actualizarManga(id, request)
                 .map(manga -> ResponseEntity.ok(toDto(manga)))
                 .orElse(ResponseEntity.notFound().build());
