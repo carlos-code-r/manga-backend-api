@@ -68,4 +68,14 @@ public class MangaService {
         mangaRepository.deleteById(id);
         return true;
     }
+
+    //busqueda de mangas por titulo y autor
+
+    public Page <Manga> buscarMangas(String titulo, String autor, Pageable pageable) {
+        if (autor != null && !autor.isBlank()) {
+            return mangaRepository.findByTituloContainingIgnoreCaseAndAutorNombreContainingIgnoreCase(titulo, autor, pageable);
+        } else {
+            return mangaRepository.findByTituloContainingIgnoreCase(titulo, pageable);
+        }
+    }
 }

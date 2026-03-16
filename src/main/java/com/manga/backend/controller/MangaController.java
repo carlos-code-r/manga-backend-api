@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manga.backend.dto.MangaDto;
@@ -30,10 +31,19 @@ public class MangaController {
     }
 
     @GetMapping
-    public Page<MangaDto> obtenerTodos(Pageable pageable) {
+    public Page<MangaDto> obtenerTodos(
+        @RequestParam(required = false) String titulo,
+        @RequestParam(required = false) String autor,
+        Pageable pageable) {
 
-        return mangaService.obtenerTodos(pageable)
-                .map(this::toDto);
+        Page <Manga> mangas;
+        if (titulo != null && !titulo.isBlank()) {
+            mangas= mangaService.buscarMangas(titulo, autor, pageable);
+        }else{
+            mangas=mangaService.obtenerTodos(pageable);
+        }
+        
+        return mangas.map(this::toDto);
     }
 
     @GetMapping("/{id}")
