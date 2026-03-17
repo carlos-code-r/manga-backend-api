@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>Manga</title>
+</head>
+
+<body>
+
+<main class="detalle">
+
+<section class="portada">
+<img src="" alt="Portada" id="portada">
+</section>
+
+<section class="info">
+
+<h1 class="titulo" id="titulo">One Piece</h1>
+
+<nav class="tabs">
+<button class="active" data-tab="descripcion">Descripción</button>
+<button data-tab="capitulos">Capítulos</button>
+<button data-tab="autor">Autor</button>
+</nav>
+
+<section class="contenido">
+
+<!-- DESCRIPCIÓN -->
+<section class="tab-content descripcion active" id="descripcion">
+<p id="descripcion-texto">
+Riqueza, fama y poder: el Rey de los Piratas lo dejó todo en un solo lugar.
+Acompaña a Luffy en un viaje frenético a través de mares imposibles para reclamar el trono.
+</p>
+</section>
+
+<!-- CAPÍTULOS -->
+<section class="tab-content" id="capitulos">
+
+<ul class="lista-capitulos" id="lista-capitulos">
+
+</ul>
+
+</section>
+
+<!-- AUTOR -->
+<section class="tab-content" id="autor">
+
+<section class="bio-autor">
+
+<p id="autor-bio">
+Eiichiro Oda nació en Kumamoto, Japón, en 1975. Desde pequeño mostró interés por el dibujo y las historias de piratas.
+</p>
+
+</section>
+
+</section>
+
+<!-- DATOS -->
+<aside class="datos">
+
+<p><strong>Título:</strong> <span id="dato-titulo">One Piece</span></p>
+<p><strong>Autor:</strong> <span id="dato-autor">Eiichiro Oda</span></p>
+<p><strong>Nacionalidad:</strong> <span id="dato-nacionalidad">Japonesa</span></p>
+<p><strong>Año:</strong> <span id="dato-anio">1999</span></p>
+<p><strong>Estado:</strong> <span id="dato-estado">En publicación</span></p>
+
+</aside>
+
+</section>
+
+</section>
+
+</main>
+
+<script src="tabs.js" defer></script>
+</body>
+</html>
