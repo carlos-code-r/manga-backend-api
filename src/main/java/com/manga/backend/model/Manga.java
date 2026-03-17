@@ -32,6 +32,7 @@ public class Manga {
     private Long id;
     private String titulo;
     private String descripcion;
+    private String imagenUrl;
 
     @Enumerated(EnumType.STRING)
 

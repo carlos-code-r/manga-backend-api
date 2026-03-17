@@ -60,4 +60,7 @@ public class CapituloService {
         capituloRepository.deleteById(id);
         return true;
     }
+    public Page<Capitulo> obtenerPorManga(Long mangaId, Pageable pageable) {
+    return capituloRepository.findByMangaId(mangaId, pageable);
+}
 }
