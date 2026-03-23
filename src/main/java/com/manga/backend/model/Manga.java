@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.manga.backend.enums.EstadoManga;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -31,6 +32,7 @@ public class Manga {
 
     private Long id;
     private String titulo;
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
     private String imagenUrl;
 

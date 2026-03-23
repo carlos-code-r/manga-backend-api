@@ -22,7 +22,7 @@ public class MangaDto {
     @Size( max=100)
     private String titulo;
     @NotBlank(message= "La descripcion es obligatoria")
-    @Size(min=10, max=500)
+    @Size(min=10, max=5000)
     private String descripcion;
     private EstadoManga estado;
     private LocalDate fechaPublicacion;

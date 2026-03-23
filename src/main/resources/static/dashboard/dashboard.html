@@ -1,70 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <title>Panel de Administración | MangaStore</title>
-    <link rel="stylesheet" href="dashboard.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
     <aside class="barra-lateral">
-      <h2>MANGA ADMIN</h2>
-      <nav class="menu-navegacion">
-        <a href="#" class="activo">🏠 Dashboard</a>
-        <a href="#">📚 Gestionar Mangas</a>
-        <a href="#">✍️ Gestionar Autores</a>
-      </nav>
+        <h2>MANGA ADMIN</h2>
+        <nav class="menu-navegacion">
+            <a href="#" class="activo" onclick="verSection('dashboard')">🏠 Dashboard</a>
+            <a href="#" onclick="verSection('mangas')">📚 Gestionar Mangas</a>
+            <a href="#" onclick="verSection('autores')">✍️ Gestionar Autores</a>
+        </nav>
     </aside>
 
     <main class="contenido-principal">
-      <header class="cabecera-seccion">
-        <div>
-          <h1>Catálogo de Mangas</h1>
-          <p>Gestiona los títulos, estados y capítulos de tu base de datos.</p>
-        </div>
-        <button class="boton-crear">+ AÑADIR NUEVO MANGA</button>
-      </header>
+        <section id="dashboard" class="view">
+            <header class="cabecera-seccion">
+                <div>
+                    <h1>Catálogo de Mangas</h1>
+                    <p>Gestiona los títulos, estados y capítulos de tu base de datos.</p>
+                </div>
+                <button class="boton-crear" onclick="verSection('form-manga')">+ AÑADIR NUEVO MANGA</button>
+            </header>
 
-      <section class="seccion-tabla">
-        <table class="tabla-gestion">
-          <thead>
-            <tr>
-              <th>Título</th>
-              <th>Autor</th>
-              <th>Descripción</th>
-              <th>Estado</th>
-              <th>Publicación</th>
-              <th>Capitulos</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>One Piece</strong></td>
-              <td>Eiichiro Oda</td>
-              <td class="columna-descripcion">Luffy busca el tesoro...</td>
-              <td><span class="etiqueta emision">En Emisión</span></td>
-              <td>1997-07-22</td>
-              <td>1100</td>
-              <td class="celda-acciones">
-                <button class="boton-editar">Editar</button>
-                <button class="boton-eliminar">Eliminar</button>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Naruto</strong></td>
-              <td>Masashi Kishimoto</td>
-              <td class="columna-descripcion">Un ninja hiperactivo...</td>
-              <td><span class="etiqueta finalizado">Finalizado</span></td>
-              <td>1999-09-21</td>
-              <td>700</td>
-              <td class="celda-acciones">
-                <button class="boton-editar">Editar</button>
-                <button class="boton-eliminar">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+            <section class="seccion-tabla">
+                <table class="tabla-gestion">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Publicación</th>
+                            <th>Capítulos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-mangas-body">
+                        </tbody>
+                </table>
+
+                <div class="paginacion-container">
+                    <button id="btn-anterior" class="btn-pag" onclick="paginaAnterior()">«</button>
+                    <div id="paginas-numeros" class="paginas-numeros">
+                        </div>
+                    <button id="btn-siguiente" class="btn-pag" onclick="paginaSiguiente()">»</button>
+                </div>
+            </section>
+        </section>
+
+        <section id="form-manga" class="view" style="display:none;">
+            <h1>Añadir Nuevo Manga</h1>
+            <button onclick="verSection('dashboard')">Volver al catálogo</button>
+            </section>
     </main>
-  </body>
+
+    <script src="dashboard.js"></script>
+</body>
 </html>
