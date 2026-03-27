@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="registro.css" />
+    <title>Panel de Administración | MangaStore</title>
+  </head>
+  <body>
+    <aside class="barra-lateral">
+      <h2>MANGA ADMIN</h2>
+      <nav class="menu-navegacion">
+        <a href="#" class="activo">➕ Crear Manga</a>
+        <a href="../catalogo/index.html">📚 Catálogo</a>
+      </nav>
+    </aside>
+
+    <main class="contenido-principal">
+      <section class="seccion-registro">
+        <header>
+          <h1>Registrar Nueva Obra</h1>
+          <p>
+            Introduce los datos del manga y la información del autor para la
+            base de datos.
+          </p>
+        </header>
+
+        <form id="formulario-manga">
+          <fieldset>
+            <legend>Información de la Obra</legend>
+
+            <label for="titulo">Título del Manga</label>
+            <input
+              type="text"
+              id="titulo"
+              placeholder="Ej: One Piece"
+              required
+            />
+
+            <label for="descripcion">Descripción / Sinopsis</label>
+            <textarea
+              id="descripcion"
+              rows="4"
+              placeholder="Breve resumen de la historia..."
+            ></textarea>
+
+            <label for="portada">URL de la Imagen (Portada)</label>
+            <input
+              type="url"
+              id="portada"
+              placeholder="http://imagen-de-portada.jpg"
+            />
+          </fieldset>
+
+          <fieldset>
+            <legend>Información del Autor</legend>
+
+            <label for="autor-nombre">Nombre del Mangaka</label>
+            <input
+              type="text"
+              id="autor-nombre"
+              placeholder="Ej: Eiichiro Oda"
+              required
+            />
+
+            <label for="nacionalidad">Nacionalidad</label>
+            <input type="text" id="nacionalidad" placeholder="Ej: Japonés" />
+
+            <label for="biografia">Biografía del Autor</label>
+            <textarea
+              id="biografia"
+              rows="3"
+              placeholder="Pequeña autobiografía..."
+            ></textarea>
+          </fieldset>
+
+          <button type="submit" class="boton-enviar">
+            PUBLICAR MANGA Y AUTOR
+          </button>
+        </form>
+
+        <div id="aviso-exito" class="aviso-flotante">
+          <span class="check">✔</span> Manga publicado correctamente
+        </div>
+        
+      </section>
+    </main>
+  </body>
+</html>

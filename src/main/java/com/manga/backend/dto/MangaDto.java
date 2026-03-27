@@ -27,6 +27,7 @@ public class MangaDto {
     private EstadoManga estado;
     private LocalDate fechaPublicacion;
     private String imagenUrl;
+    private String autorNombre;
     @NotNull
     private Long autorId;
-}
+    private Integer totalCapitulos;}

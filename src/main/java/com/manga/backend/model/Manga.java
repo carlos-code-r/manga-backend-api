@@ -35,7 +35,8 @@ public class Manga {
     @Column(columnDefinition = "TEXT")
     private String descripcion;
     private String imagenUrl;
-
+    @Column(name = "total_capitulos")
+    private Integer totalCapitulos;
     @Enumerated(EnumType.STRING)
 
     private EstadoManga estado;

@@ -79,8 +79,10 @@ public class MangaController {
 
     private MangaDto toDto(Manga manga) {
         Long autorId=null;
+        String autorNombre=null;
         if(manga.getAutor() !=null){
             autorId=manga.getAutor().getId();
+            autorNombre=manga.getAutor().getNombre();
         }
         return new MangaDto(
                 manga.getId(),
@@ -89,6 +91,8 @@ public class MangaController {
                 manga.getEstado(),
                 manga.getFechaPublicacion(),
                 manga.getImagenUrl(),
-                autorId);
+                autorNombre,     
+                autorId,
+                manga.getTotalCapitulos());
     }
 }

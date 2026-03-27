@@ -42,7 +42,10 @@ public class MangaService {
         manga.setEstado(dto.getEstado());
         manga.setFechaPublicacion(dto.getFechaPublicacion());
         manga.setAutor(autor);
-        return mangaRepository.save(manga);
+        manga.setTotalCapitulos(dto.getTotalCapitulos());
+        dto.setAutorNombre(autor.getNombre());
+        
+            return mangaRepository.save(manga);
     }
 
     public Optional<Manga> actualizarManga(Long id, MangaDto dto) {
@@ -51,7 +54,7 @@ public class MangaService {
             manga.setDescripcion(dto.getDescripcion());
             manga.setEstado(dto.getEstado());
             manga.setFechaPublicacion(dto.getFechaPublicacion());
-
+            manga.setTotalCapitulos(dto.getTotalCapitulos());
             if (dto.getAutorId() != null) {
                 Autor autor = autorRepository.findById(dto.getAutorId())
                         .orElseThrow(() -> new RuntimeException("Autor no encontrado"));

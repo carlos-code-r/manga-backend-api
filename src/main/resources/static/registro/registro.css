@@ -127,3 +127,24 @@ input:focus, textarea:focus {
 .boton-enviar:hover {
     background-color: #115b8c;
 }
+
+/* Estilo del aviso de éxito */
+.aviso-flotante {
+    display: none; /* Invisible al principio */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #27ae60; /* Verde éxito */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-weight: bold;
+    z-index: 9999;
+    animation: aparecer 0.5s ease-out;
+}
+
+@keyframes aparecer {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
