@@ -62,7 +62,13 @@ public class UsuarioController {
         }
         return ResponseEntity.noContent().build();
     }
-
+@PostMapping("/login-test")
+    public ResponseEntity<UsuarioDto> login(@RequestBody UsuarioDto loginDto) {
+        return usuarioService.buscarPorNombre(loginDto.getUsuario())
+            .filter(u -> u.getPassword().equals(loginDto.getPassword()))
+            .map(u -> ResponseEntity.ok(toDto(u)))
+            .orElse(ResponseEntity.status(401).build());
+    }
     private UsuarioDto toDto(Usuario usuario) {
         return new UsuarioDto(
                 usuario.getId(),

@@ -12,9 +12,9 @@ const errorBanner = document.getElementById("error-login");
 
 let esRegistro = false;
 
-// FUNCIÓN PARA CAMBIAR ENTRE MODOS
+// 1. CAMBIO DE MODO (Visual)
 const cambiarModo = (modo) => {
-    errorBanner.style.display = "none";
+    if (errorBanner) errorBanner.style.display = "none";
     if (modo === 'registro') {
         esRegistro = true;
         toggleWrapper.classList.add("registro-active");
@@ -37,18 +37,30 @@ const cambiarModo = (modo) => {
 tabLogin.onclick = () => cambiarModo('login');
 tabRegistro.onclick = () => cambiarModo('registro');
 
-// ENVÍO DE DATOS
+// 2. ENVÍO DE DATOS AL BACKEND
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
     
-    const usuario = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const usuarioValue = document.getElementById("username").value.trim();
+    const passwordValue = document.getElementById("password").value.trim();
+    const emailField = document.getElementById("email");
+    const emailValue = emailField ? emailField.value.trim() : "";
 
     const url = esRegistro ? API_BASE : API_LOGIN;
+    
+    // Construimos el objeto según tu UsuarioDto.java
     const bodyData = esRegistro 
-        ? { usuario, password, email, rol: "USER" } 
-        : { usuario, password };
+        ? { 
+            usuario: usuarioValue, 
+            password: passwordValue, 
+            email: emailValue, 
+            rol: "ADMIN" // Enviamos el Enum en mayúsculas
+          } 
+        : { 
+            usuario: usuarioValue, 
+            password: passwordValue 
+            // En login NO enviamos email para evitar el error 400 de validación
+          };
 
     try {
         const res = await fetch(url, {
@@ -59,27 +71,31 @@ form.addEventListener("submit", async (e) => {
 
         if (res.ok) {
             if (esRegistro) {
-                alert("¡Cuenta creada! Ya puedes iniciar sesión.");
+                alert("¡Cuenta creada con éxito! Ahora inicia sesión.");
                 cambiarModo('login');
             } else {
-                alert("¡Bienvenido Admin!");
-                window.location.href = "../dashboard/dashboard.html";
+                // ÉXITO: Guardamos sesión y vamos al Dashboard
+                localStorage.setItem("rolUsuario", "ADMIN");
+                localStorage.setItem("nombreUsuario", usuarioValue);
+                
+                alert("¡Bienvenido, " + usuarioValue + "!");
+                window.location.href = "../dashboard/dashboard.html"; 
             }
         } else {
-            errorBanner.style.display = "block";
+            // Si el backend responde 400 (Bad Request) o 401 (Unauthorized)
+            if (errorBanner) errorBanner.style.display = "block";
+            const errorMsg = await res.text();
+            console.error("Error desde Java:", errorMsg);
         }
     } catch (err) {
-        alert("Error de conexión con el servidor.");
+        console.error("Error de conexión:", err);
+        alert("No se pudo conectar con el servidor Java. ¿Está encendido?");
     }
 });
-// Al cargar la página, miramos qué dice la URL
+
+// 3. INICIO: Detectar modo por URL
 window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const modo = params.get("mode");
-
-    if (modo === "registro") {
-        cambiarModo('registro'); 
-    } else {
-        cambiarModo('login');    
-    }
+    cambiarModo(modo === "registro" ? 'registro' : 'login');
 });

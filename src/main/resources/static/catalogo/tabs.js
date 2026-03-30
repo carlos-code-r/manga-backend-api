@@ -1,31 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
     /* ============================================================
-       1. FILTRO DE BÚSQUEDA (Para index.html)
+       0. LÓGICA DE SESIÓN (LOGIN/REGISTRO/PANEL)
+       ============================================================ */
+    // IMPORTANTE: Usamos "rolUsuario" y "ADMIN" para que coincida con login.js
+    const esAdmin = localStorage.getItem("rolUsuario") === "ADMIN";
+    const nombreUsuario = localStorage.getItem("nombreUsuario");
+
+    const panelBtn = document.getElementById("btn-panel-creador");
+    const loginBtn = document.getElementById("btn-login");
+    const registroBtn = document.getElementById("btn-registro");
+
+    if (esAdmin) {
+        if (panelBtn) {
+            panelBtn.style.display = "flex"; // Muestra el botón de engranaje
+            panelBtn.innerText = `⚙️ Panel de ${nombreUsuario || 'Admin'}`;
+        }
+        if (loginBtn) loginBtn.style.display = "none";       // Oculta Login
+        if (registroBtn) registroBtn.style.display = "none"; // Oculta Registro
+    }
+
+    /* ============================================================
+       1. FILTRO DE BÚSQUEDA (index.html)
        ============================================================ */
     const inputBusqueda = document.getElementById("buscar-titulo");
     const tarjetasManga = document.querySelectorAll(".catalogo .card");
 
-    // Solo se ejecuta si estamos en la página que tiene el buscador
     if (inputBusqueda) {
         inputBusqueda.addEventListener("input", () => {
             const textoBuscado = inputBusqueda.value.toLowerCase().trim();
-
             tarjetasManga.forEach(tarjeta => {
                 const titulo = tarjeta.querySelector("h3").textContent.toLowerCase();
-                
-                // Filtro por letras: si el título contiene lo que escribes, se queda
-                if (titulo.includes(textoBuscado)) {
-                    tarjeta.style.display = "flex";
-                } else {
-                    tarjeta.style.display = "none";
-                }
+                tarjeta.style.display = titulo.includes(textoBuscado) ? "flex" : "none";
             });
         });
     }
 
     /* ============================================================
-       2. LÓGICA DE PESTAÑAS (Para manga.html)
+       2. LÓGICA DE PESTAÑAS (manga.html)
        ============================================================ */
     const botones = document.querySelectorAll(".tabs button");
     const contenidos = document.querySelectorAll(".tab-content");
@@ -39,30 +50,35 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 const idTab = btn.dataset.tab;
                 const targetContent = document.getElementById(idTab);
-                if (targetContent) {
-                    targetContent.classList.add("active");
-                }
+                if (targetContent) targetContent.classList.add("active");
             });
         });
     }
 
     /* ============================================================
-       3. CARGA DE API (Para manga.html)
+       3. CARGA DE API (manga.html)
        ============================================================ */
-    const id = new URLSearchParams(window.location.search).get("id");
-    if (id && document.getElementById("portada")) {
-        cargarManga(id);
+    const params = new URLSearchParams(window.location.search);
+    const idManga = params.get("id");
+    
+    // Solo cargamos si hay ID y estamos en la página de detalle
+    if (idManga && document.getElementById("portada")) {
+        cargarManga(idManga);
     }
 });
 
+/* ============================================================
+   4. FUNCIÓN ASÍNCRONA PARA CARGAR DATOS
+   ============================================================ */
 async function cargarManga(id) {
     try {
         const res = await fetch(`http://localhost:8080/mangas/${id}`);
+        if (!res.ok) throw new Error("Manga no encontrado");
         const manga = await res.json();
 
         // Rellenar cabecera y descripción
         document.getElementById("titulo").textContent = manga.titulo;
-        document.getElementById("portada").src = manga.imagenUrl;
+        document.getElementById("portada").src = manga.imagenUrl || 'https://via.placeholder.com/200x300';
         document.getElementById("descripcion-texto").textContent = manga.descripcion;
         
         // Cuadro de datos
@@ -70,14 +86,16 @@ async function cargarManga(id) {
         document.getElementById("dato-estado").textContent = manga.estado;
         document.getElementById("dato-anio").textContent = manga.fechaPublicacion ? manga.fechaPublicacion.split("-")[0] : "-";
 
-        // Autor
-        const resAutor = await fetch(`http://localhost:8080/autores/${manga.autorId}`);
-        const autor = await resAutor.json();
-        document.getElementById("autor-bio").textContent = autor.autobiografia;
-        document.getElementById("dato-autor").textContent = autor.nombre;
-        document.getElementById("dato-nacionalidad").textContent = autor.nacionalidad;
+        // Cargar Autor (si existe autorId)
+        if (manga.autorId) {
+            const resAutor = await fetch(`http://localhost:8080/autores/${manga.autorId}`);
+            const autor = await resAutor.json();
+            document.getElementById("autor-bio").textContent = autor.autobiografia;
+            document.getElementById("dato-autor").textContent = autor.nombre;
+            document.getElementById("dato-nacionalidad").textContent = autor.nacionalidad;
+        }
 
-        // Capítulos
+        // Cargar Capítulos
         const resCaps = await fetch(`http://localhost:8080/capitulos?mangaId=${id}`);
         const caps = await resCaps.json();
         const lista = document.getElementById("lista-capitulos");

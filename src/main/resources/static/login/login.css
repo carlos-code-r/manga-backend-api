@@ -20,7 +20,10 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
-.login-header { text-align: center; margin-bottom: 25px; }
+.login-header { 
+    text-align: center;
+     margin-bottom: 25px; 
+    }
 .login-header h1 {
     font-size: 32px;
     background: linear-gradient(90deg, #4facfe, #00f2fe);
@@ -28,7 +31,11 @@ body {
     background-clip: text;
     color: transparent;
 }
-.login-header p { color: #8ec5ff; font-size: 14px; margin-top: 5px; }
+.login-header p { 
+    color: #8ec5ff;
+     font-size: 14px; 
+     margin-top: 5px;
+     }
 
 /* ESTILOS DEL TOGGLE SELECTOR */
 .toggle-container {
@@ -53,7 +60,9 @@ body {
     transition: 0.3s;
 }
 
-.toggle-btn.active { color: #1b1c5e; }
+.toggle-btn.active { 
+    color: #1b1c5e;
+ }
 
 .toggle-bg {
     position: absolute;
@@ -65,11 +74,19 @@ body {
     z-index: 1;
 }
 
-.registro-active .toggle-bg { transform: translateX(100%); }
+.registro-active .toggle-bg {
+     transform: translateX(100%); 
+    }
 
 /* INPUTS Y BOTÓN */
-.input-group { margin-bottom: 18px; }
-.input-group label { display: block; margin-bottom: 6px; font-size: 14px; }
+.input-group { 
+    margin-bottom: 18px;
+}
+.input-group label { 
+    display: block; 
+    margin-bottom: 6px; 
+    font-size: 14px;
+ }
 .input-group input {
     width: 100%;
     padding: 12px;
@@ -79,7 +96,9 @@ body {
     color: white;
     outline: none;
 }
-.input-group input:focus { border-color: #00f2fe; }
+.input-group input:focus { 
+    border-color: #00f2fe;
+ }
 
 .btn-login {
     width: 100%;
@@ -94,7 +113,10 @@ body {
     transition: 0.3s;
 }
 
-.btn-login:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4); }
+.btn-login:hover { 
+    transform: translateY(-2px);
+     box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+     }
 
 .error-banner {
     background: rgba(255, 0, 0, 0.2);
@@ -106,8 +128,13 @@ body {
     font-size: 13px;
 }
 
-.login-footer { text-align: center; margin-top: 25px; }
-.login-footer a { color: #8ec5ff; text-decoration: none; font-size: 13px; }
+.login-footer { 
+    text-align: center;
+     margin-top: 25px; 
+    }
+.login-footer a { 
+    color: #8ec5ff; 
+    text-decoration: none; font-size: 13px; }
 
 .login-footer a:hover {
     text-decoration: underline;

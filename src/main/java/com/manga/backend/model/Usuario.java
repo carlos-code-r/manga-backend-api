@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.manga.backend.enums.Rol;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -26,6 +27,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private  Long id;
+    @Column(unique = true, nullable = false)
     private String usuario;
     private String email;
     private LocalDate fechaAlta;

@@ -8,7 +8,7 @@
 body {
     background: radial-gradient(circle at center, #115b8c, #14343f, #1b1c5e);
     color: white;
-    font-family: Arial, sans-serif; /* Añadido sans-serif por compatibilidad */
+    font-family: Arial, sans-serif;
 }
 
 
@@ -20,7 +20,7 @@ h1 {
     margin-top: 80px;
     font-size: 32px;
     background: linear-gradient(90deg, #4facfe, #00f2fe);
-    -webkit-background-clip: text; /* Necesario para que funcione el gradient en texto */
+    -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
@@ -29,8 +29,8 @@ h1 {
 .buscador-wrapper {
     display: flex;
     justify-content: center;
-    align-items: center; /* Alinea verticalmente botones e input */
-    gap: 15px; /* Espacio entre botones y buscador */
+    align-items: center;
+    gap: 15px;
     margin-bottom: 10px;
     padding: 0 20px;
 }
@@ -38,6 +38,7 @@ h1 {
 .auth-buttons {
     display: flex;
     gap: 10px;
+    align-items: center; /* Asegura que los botones se alineen bien */
 }
 
 .btn-auth {
@@ -50,7 +51,7 @@ h1 {
     white-space: nowrap;
 }
 
-/* Botón Iniciar Sesión: Estilo con borde */
+/* Botón Iniciar Sesión:*/
 .btn-login {
     color: #ffffff;
     border: 1px solid rgba(79, 172, 254, 0.4);
@@ -62,7 +63,7 @@ h1 {
     border-color: #4facfe;
 }
 
-/* Botón Registro: Con degradado */
+/* Botón Registro:  */
 .btn-registro {
     background: linear-gradient(90deg, #4facfe, #00f2fe);
     color: #0b1a2a; 
@@ -73,8 +74,30 @@ h1 {
     box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
 }
 
+.btn-panel {
+    text-decoration: none;
+    color: #4facfe;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px dashed #4facfe;
+    padding: 12px 20px;
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.btn-panel:hover {
+    background: rgba(79, 172, 254, 0.2);
+    border-style: solid;
+    color: white;
+    box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+}
+
 .buscador {
-    width: min(700px, 70vw); /* Ajustado un poco el ancho para que quepan los botones */
+    width: min(700px, 70vw);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -154,6 +177,38 @@ h1 {
 
 
 /*DETALLE MANGA */
+
+.navegacion-superior {
+    max-width: 1300px;
+    margin: 20px auto 0;
+    padding: 0 40px;
+    display: flex;              
+    justify-content: space-between; 
+    align-items: center;        
+}
+
+.btn-volver {
+    text-decoration: none;
+    color: #4facfe;
+    font-size: 20px; 
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 1px solid rgba(79, 172, 254, 0.4);
+    border-radius: 10px;
+    background: rgba(17, 91, 140, 0.2);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-volver:hover {
+    background: rgba(79, 172, 254, 0.3);
+    color: white;
+    border-color: #4facfe;
+    transform: translateX(-5px); 
+    box-shadow: 0 0 15px rgba(79, 172, 254, 0.4); 
+}
 
 .detalle{
     display:flex;
@@ -276,15 +331,19 @@ h1 {
     display:block;
 }
 
-.lista-capitulos{
-    list-style:none;
-    margin:0;
-    padding:0;
-    max-height:260px;
-    overflow-y:auto;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+/* --- ESTILO  DE SCROLLBAR  --- */
+
+html, 
+.lista-capitulos {
+    overflow-y: auto; 
+    scrollbar-width: thin; 
+    scrollbar-color: #4facfe rgba(0, 0, 0, 0.2); 
+}
+
+/* --- LISTA DE CAPÍTULOS --- */
+.lista-capitulos {
+    padding-right: 10px; 
+    max-height: 200px; 
 }
 
 .lista-capitulos li{
@@ -299,7 +358,7 @@ h1 {
 
 .lista-capitulos li:hover{
     background:rgba(79, 172, 254, 0.2);
-    transform: translateX(10px); /* Efecto de moverse a la derecha */
+    transform: translateX(10px);
 }
 
 .bio-autor{
