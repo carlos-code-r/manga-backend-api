@@ -41,6 +41,7 @@
               id="descripcion"
               rows="4"
               placeholder="Breve resumen de la historia..."
+              required
             ></textarea>
 
             <label for="portada">URL de la Imagen (Portada)</label>
@@ -48,6 +49,24 @@
               type="url"
               id="portada"
               placeholder="http://imagen-de-portada.jpg"
+            />
+
+            <label for="fecha-publicacion">Fecha de publicación</label>
+            <input type="date" id="fecha-publicacion" />
+
+            <label for="estado">Estado</label>
+            <select id="estado">
+              <option value="EN_PUBLICACION">En publicación</option>
+              <option value="FINALIZADO">Finalizado</option>
+            </select>
+
+            <label for="total-capitulos">Total capítulos</label>
+            <input
+              type="number"
+              id="total-capitulos"
+              min="0"
+              value="0"
+              placeholder="Ej: 120"
             />
           </fieldset>
 
@@ -84,5 +103,6 @@
         
       </section>
     </main>
+    <script src="registro.js"></script>
   </body>
 </html>

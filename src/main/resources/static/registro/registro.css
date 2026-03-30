@@ -104,7 +104,16 @@ input, textarea {
     resize: none;
 }
 
-input:focus, textarea:focus {
+select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-family: inherit;
+    background-color: #fff;
+}
+
+input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: #4facfe;
     box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);

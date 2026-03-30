@@ -15,7 +15,13 @@ async function cargarMangas(pagina) {
 
     const data = await respuesta.json();
     console.log("Datos que llegan del Back:", data.content);
-    const mangas = data.content;
+    const mangas = data.content || [];
+
+    if (data.totalPages > 0 && pagina >= data.totalPages) {
+      paginaActual = data.totalPages - 1;
+      cargarMangas(paginaActual);
+      return;
+    }
 
     const tablaBody = document.getElementById("tabla-mangas-body");
     tablaBody.innerHTML = "";
@@ -24,15 +30,15 @@ async function cargarMangas(pagina) {
       const claseEtiqueta =
         manga.estado === "EN_PUBLICACION" ? "emision" : "finalizado";
       const textoEstado =
-        manga.estado === "EN_PUBLICACION" ? "En Emisión" : "Finalizado";
+        manga.estado === "EN_PUBLICACION" ? "En publicación" : "Finalizado";
 
       tablaBody.innerHTML += `
     <tr>
         <td><strong>${manga.titulo}</strong></td>
-        <td>${manga.autorNombre}</td>
+        <td>${manga.autorNombre || "-"}</td>
         <td class="columna-descripcion">${manga.descripcion}</td>
         <td><span class="etiqueta ${claseEtiqueta}">${textoEstado}</span></td>
-        <td>${new Date(manga.fechaPublicacion).toLocaleDateString("es-ES")}</td>
+        <td>${formatearFecha(manga.fechaPublicacion)}</td>
         
         <td>${manga.totalCapitulos || 0}</td> 
         
@@ -65,16 +71,26 @@ function renderizarNumeros(data) {
     contenedor.appendChild(cuadro);
   }
 
-  document.getElementById("btn-anterior").disabled = data.first;
-  document.getElementById("btn-siguiente").disabled = data.last;
+  if (data.totalPages === 0) {
+    const cuadro = document.createElement("span");
+    cuadro.innerText = "1";
+    cuadro.className = "num-cuadro activo";
+    contenedor.appendChild(cuadro);
+  }
+
+  document.getElementById("btn-anterior").disabled = data.first || data.totalPages === 0;
+  document.getElementById("btn-siguiente").disabled = data.last || data.totalPages === 0;
 }
 
 function paginaSiguiente() {
+  const botonSiguiente = document.getElementById("btn-siguiente");
+  if (botonSiguiente.disabled) return;
   paginaActual++;
   cargarMangas(paginaActual);
 }
 function paginaAnterior() {
-  if (paginaActual > 0) {
+  const botonAnterior = document.getElementById("btn-anterior");
+  if (!botonAnterior.disabled && paginaActual > 0) {
     paginaActual--;
     cargarMangas(paginaActual);
   }
@@ -87,11 +103,20 @@ function verSection(id) {
 
 async function eliminarManga(id) {
   if (confirm("¿Eliminar este manga?")) {
-    await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+    const resp = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+    if (!resp.ok) {
+      alert("No se pudo eliminar el manga.");
+      return;
+    }
     cargarMangas(paginaActual);
   }
 }
 
 function editarManga(id) {
   window.location.href = "../registro/registro.html?id=" + id;
+}
+
+function formatearFecha(fecha) {
+  if (!fecha) return "-";
+  return new Date(fecha).toLocaleDateString("es-ES");
 }
