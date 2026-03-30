@@ -68,6 +68,8 @@ public class UsuarioController {
                 usuario.getId(),
                 usuario.getUsuario(),
                 usuario.getEmail(),
-                usuario.getFechaAlta());
+                usuario.getFechaAlta(),
+                usuario.getPassword(),
+                usuario.getRol());
     }
 }

@@ -1,13 +1,7 @@
-/* login.css - LIMPIO DE VERDES */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ESTILOS BASE */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    /* Mantenemos tu degradado de MangaFenrir */
     background: radial-gradient(circle at center, #115b8c, #14343f, #1b1c5e);
     color: white;
     font-family: Arial, sans-serif;
@@ -19,99 +13,101 @@ body {
 
 .login-card {
     width: min(420px, 90vw);
-    padding: 45px 40px;
-    
-    /* ARREGLO FINAL: Quitamos el verde #14343f y ponemos tu AZUL MARINO sólido */
-    background: linear-gradient(90deg, #21517b70, #114d506b);
-    
-    /* Borde cian brillante de tus títulos */
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(33, 81, 123, 0.7), rgba(17, 77, 80, 0.6));
     border: 2px solid #4facfe; 
-    border-radius: 12px;
-    
-    /* Sombra para que flote */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
-.login-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
+.login-header { text-align: center; margin-bottom: 25px; }
 .login-header h1 {
     font-size: 32px;
-    font-weight: 900;
-    /* Tu gradiente cian de MangaFenrir */
     background: linear-gradient(90deg, #4facfe, #00f2fe);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
+.login-header p { color: #8ec5ff; font-size: 14px; margin-top: 5px; }
 
-.login-header p {
+/* ESTILOS DEL TOGGLE SELECTOR */
+.toggle-container {
+    display: flex;
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    margin-bottom: 30px;
+    padding: 4px;
+    border: 1px solid rgba(79, 172, 254, 0.2);
+}
+
+.toggle-btn {
+    flex: 1;
+    border: none;
+    background: none;
     color: #8ec5ff;
-    font-size: 14px;
-    text-transform: uppercase;
-    margin-top: 5px;
-}
-
-.input-group {
-    margin-bottom: 20px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: white;
-    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
     font-weight: bold;
+    z-index: 2;
+    transition: 0.3s;
 }
 
+.toggle-btn.active { color: #1b1c5e; }
+
+.toggle-bg {
+    position: absolute;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    border-radius: 25px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.registro-active .toggle-bg { transform: translateX(100%); }
+
+/* INPUTS Y BOTÓN */
+.input-group { margin-bottom: 18px; }
+.input-group label { display: block; margin-bottom: 6px; font-size: 14px; }
 .input-group input {
     width: 100%;
-    padding: 12px 15px;
-    /* Fondo oscuro para los campos de texto */
-    background-color: rgba(0, 0, 0, 0.25); 
-    border: 1px solid rgba(79, 172, 254, 0.4);
-    border-radius: 8px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(79, 172, 254, 0.3);
+    border-radius: 10px;
     color: white;
-    font-size: 16px;
     outline: none;
 }
-
-.input-group input:focus {
-    border-color: #00f2fe;
-}
+.input-group input:focus { border-color: #00f2fe; }
 
 .btn-login {
     width: 100%;
     padding: 15px;
-    margin-top: 10px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     background: linear-gradient(90deg, #4facfe, #00f2fe);
-    color: #1b1c5e; 
+    color: #1b1c5e;
     font-weight: bold;
-    font-size: 16px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
-.btn-login:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
-}
+.btn-login:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4); }
 
-.login-footer {
+.error-banner {
+    background: rgba(255, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
     text-align: center;
-    margin-top: 25px;
-}
-
-.login-footer a {
-    color: #8ec5ff;
-    text-decoration: none;
+    border: 1px solid red;
     font-size: 13px;
 }
+
+.login-footer { text-align: center; margin-top: 25px; }
+.login-footer a { color: #8ec5ff; text-decoration: none; font-size: 13px; }
 
 .login-footer a:hover {
     text-decoration: underline;

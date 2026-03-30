@@ -30,6 +30,9 @@ public class UsuarioService {
         usuario.setUsuario(dto.getUsuario());
         usuario.setEmail(dto.getEmail());
         usuario.setFechaAlta(LocalDate.now());
+        usuario.setPassword(dto.getPassword());
+        usuario.setRol(dto.getRol());
+
         return usuarioRepository.save(usuario);
     }
     public Optional <Usuario> actualizarUsuario(Long id,UsuarioDto dto){
@@ -46,4 +49,8 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
         return true;
     }
+
+    public Optional<Usuario> buscarPorNombre(String nombreUsuario) {
+    return usuarioRepository.findByUsuario(nombreUsuario);
+}
 }

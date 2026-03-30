@@ -1,4 +1,4 @@
-/*ESTILOS GENERALES*/
+/* GENERAL */
 * {
     margin: 0;
     padding: 0;
@@ -8,30 +8,88 @@
 body {
     background: radial-gradient(circle at center, #115b8c, #14343f, #1b1c5e);
     color: white;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
 }
 
-
-/*CATALOGO (index.html)*/
-
+/* TITULO PRINCIPAL */
 h1 {
     text-align: center;
-    margin-bottom: 80px;
-    margin-top: 80px;
+    margin: 80px 0;
     font-size: 32px;
     background: linear-gradient(90deg, #4facfe, #00f2fe);
     background-clip: text;
+    -webkit-background-clip: text;
     color: transparent;
 }
 
+/* SECCION BUSCADOR Y BOTONES */
 .buscador-wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 15px;
     margin-bottom: 10px;
+    padding: 0 20px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-auth {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Contenedor que agrupa los dos botones */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilo común para ambos (tamaño, bordes, fuente) */
+.btn-auth {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Botón Iniciar Sesión: Estilo más discreto, solo borde */
+.btn-login {
+    color: #ffffff;
+    border: 1px solid rgba(79, 172, 254, 0.4);
+    background: rgba(17, 91, 140, 0.2);
+}
+
+.btn-login:hover {
+    background: rgba(79, 172, 254, 0.3);
+    border-color: #4facfe;
+}
+
+/* Botón Registro: Con el degradado azul que usas en el título */
+.btn-registro {
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    color: #0b1a2a; /* Texto oscuro para que resalte */
+}
+
+.btn-registro:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
 }
 
 .buscador {
-    width: min(700px, 90vw);
+    width: min(600px, 60vw);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -40,10 +98,6 @@ h1 {
     border-radius: 14px;
     background: rgba(17, 91, 140, 0.18);
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
-}
-
-.buscador-icono {
-    font-size: 18px;
 }
 
 .buscador input {
@@ -64,13 +118,14 @@ h1 {
     box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.16);
 }
 
+/* CATALOGO */
 .catalogo {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 30px;
     max-width: 1200px;
     margin: 60px auto;
-    justify-content: center;
+    padding: 0 20px;
 }
 
 .card {
@@ -79,9 +134,10 @@ h1 {
     gap: 6px;
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
-    padding-bottom: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
 }
+
 .card img {
     width: 100%;
     aspect-ratio: 3/4;
@@ -89,178 +145,86 @@ h1 {
 }
 
 .card h3 {
-    padding: 0 8px 8px 8px;
+    padding: 0 8px;
     background: linear-gradient(90deg, #4facfe, #00f2fe);
     background-clip: text;
+    -webkit-background-clip: text;
     color: transparent;
 }
 
 .card p {
-    padding: 0 8px 8px 8px;
+    padding: 0 8px 10px 8px;
     color: gray;
 }
 
-.card:hover{
-  transform: translateY(-5px);
+.card:hover {
+    transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-
-/*DETALLE MANGA (manga.html)*/
-
-.detalle{
-    display:flex;
-    gap:60px;
-    max-width:1100px;
-    margin:80px auto;
-    padding:20px;
-    align-items:flex-start;
+/* DETALLE Y TABS */
+.detalle {
+    display: flex;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 20px;
 }
 
-.info{
-    max-width:650px;
+.portada img {
+    width: 320px;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.55);
 }
 
-
-/*PORTADA*/
-
-.portada{
-    margin-top:90px;
+.titulo {
+    font-size: 36px;
+    color: #58c5ff;
+    margin-bottom: 10px;
 }
 
-.portada img{
-    width:320px;
-    aspect-ratio:3/4;
-    object-fit:cover;
-    border-radius:12px;
-    box-shadow:0 12px 35px rgba(0,0,0,0.55);
+.tabs {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
 }
 
-
-/*TITULO*/
-
-.titulo{
-    font-size:36px;
-    color:#58c5ff;
-    font-weight:600;
-    margin-bottom:10px;
-    display:inline-block;
+.tabs button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #8ec5ff;
+    cursor: pointer;
+    padding: 10px 0;
 }
 
-
-/*TABS*/
-
-.tabs{
-    display:flex;
-    gap:30px;
-    margin-top:6px;
-    margin-bottom:18px;
-    border-bottom:1px solid rgba(255,255,255,0.18);
+.tabs button.active {
+    color: white;
+    border-bottom: 2px solid #8ec5ff;
 }
 
-.tabs button{
-    background:none;
-    border:none;
-    font-size:25px;
-    color:#8ec5ff;
-    cursor:pointer;
-    padding:10px 0;
+.datos {
+    background: rgba(0,0,0,0.45);
+    padding: 20px;
+    border-radius: 12px;
+    color: #dbefff;
+    min-width: 240px;
 }
 
-.tabs button:hover{
-    color:#ffffff;
+.lista-capitulos {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.tabs button.active{
-    color:white;
-    border-bottom:2px solid #8ec5ff;
+.lista-capitulos li {
+    background: rgba(0,0,0,0.25);
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-
-/*CONTENIDO*/
-
-.contenido{
-    display:flex;
-    gap:60px;
-    margin-top:25px;
-}
-
-.descripcion h2{
-    margin-bottom:12px;
-    font-size:22px;
-}
-
-.descripcion p{
-    font-size:22px;
-    line-height:1.8;
-    color:#d9ecff;
-    max-width:520px;
-}
-
-
-/*TARJETA DATOS MANGA*/
-
-.datos{
-    flex:0 0 240px;
-    background:rgba(0,0,0,0.45);
-    padding:20px;
-    border-radius:12px;
-    color:#dbefff;
-    line-height:1.8;
-}
-
-.datos p{
-    margin-bottom:4px;
-}
-
-.datos strong{
-    color:#ffffff;
-}
-
-.tab-content{
-display:none;
-}
-
-.tab-content.active{
-display:block;
-}
-
-.lista-capitulos{
-list-style:none;
-margin:0;
-padding:0;
-max-height:260px;
-overflow-y:auto;
-display:flex;
-flex-direction:column;
-gap:8px;
-}
-
-.lista-capitulos li{
-background:rgba(0,0,0,0.25);
-padding:12px 14px;
-border-radius:8px;
-color:#e3f2ff;
-font-size:16px;
-cursor:pointer;
-transition:background 0.2s ease;
-}
-
-.lista-capitulos li:hover{
-background:rgba(0,0,0,0.45);
-}
-.bio-autor{
-max-width:520px;
-}
-
-.bio-autor h2{
-font-size:24px;
-margin-bottom:12px;
-color:#58c5ff;
-}
-
-.bio-autor p{
-font-size:20px;
-line-height:1.8;
-color:#d9ecff;
-}
+.tab-content { display: none; }
+.tab-content.active { display: block; }

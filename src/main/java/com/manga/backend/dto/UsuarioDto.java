@@ -2,6 +2,8 @@ package com.manga.backend.dto;
 
 import java.time.LocalDate;
 
+import com.manga.backend.enums.Rol;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,4 +26,8 @@ public class UsuarioDto {
     @Size( max=80)
     private String email;
     private LocalDate fechaAlta;
+    @NotBlank(message = "La contraseña es obligatoria")
+    @Size(min=8, max=20)
+    private String password;
+    private Rol rol;
 }
