@@ -1,4 +1,4 @@
-/* RESET INICIAL - Siempre primero */
+/* RESET INICIAL */
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +11,7 @@ body {
     color: #333;
     display: flex;
     min-height: 100vh;
+    font-size: 1.1rem;
 }
 
 /* BARRA LATERAL (ASIDE) */
@@ -47,7 +48,7 @@ body {
     font-weight: bold;
 }
 
-/* CONTENIDO PRINCIPAL (MAIN) */
+/* CONTENIDO PRINCIPAL */
 .contenido-principal {
     flex: 1;
     padding: 3rem;
@@ -128,13 +129,20 @@ input:focus, textarea:focus, select:focus {
     border: none;
     border-radius: 8px;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     cursor: pointer;
     transition: 0.3s;
 }
-
+.boton-enviar:active {
+    transform: scale(0.98);
+}
 .boton-enviar:hover {
     background-color: #115b8c;
+}
+
+.menu-navegacion a:hover {
+    background-color: rgba(79, 172, 254, 0.1);
+    color: white;
 }
 
 /* Estilo del aviso de éxito */
