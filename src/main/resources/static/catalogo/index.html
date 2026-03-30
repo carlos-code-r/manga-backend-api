@@ -2,155 +2,152 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="styles.css">
-
-<title>Catalogo Manga-Mangafenrir</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Catalogo Manga-Mangafenrir</title>
 </head>
 
 <body>
-<h1>MANGAFENRIR</h1>
-<section class="buscador-wrapper">
-    <div class="auth-buttons">
-        <a href="../login/login.html?mode=login" class="btn-auth btn-login">Iniciar Sesión</a>
+    <h1>MANGAFENRIR</h1>
+    <section class="buscador-wrapper">
+        <div class="auth-buttons">
+            <a href="../login/login.html?mode=login" class="btn-auth btn-login">Iniciar Sesión</a>
+            <a href="../login/login.html?mode=registro" class="btn-auth btn-registro">Crear cuenta</a>
+        </div>
         
-        <a href="../login/login.html?mode=registro" class="btn-auth btn-registro">Crear cuenta</a>
-    </div>
-    
-    <div class="buscador">
-        <span class="buscador-icono" aria-hidden="true">🔍</span>
-        <input 
-            type="text" 
-            id="buscar-titulo" 
-            placeholder="Buscar por título..." 
-            aria-label="Buscar manga por título">
-    </div>
-</section>
+        <div class="buscador">
+            <span class="buscador-icono" aria-hidden="true">🔍</span>
+            <input 
+                type="text" 
+                id="buscar-titulo" 
+                placeholder="Buscar por título..." 
+                aria-label="Buscar manga por título">
+        </div>
+    </section>
 
-<main class="catalogo">
+    <main class="catalogo">
+        <a href="manga.html?id=1" class="card">
+            <img src="https://cdn.myanimelist.net/images/manga/2/253146.jpg" alt="One Piece">
+            <h3>One Piece</h3>
+            <p>Eiichiro Oda</p>
+        </a>
 
-<a href="manga.html?id=1" class="card">
-<img src="https://cdn.myanimelist.net/images/manga/2/253146.jpg" alt="One Piece">
-<h3>One Piece</h3>
-<p>Eiichiro Oda</p>
-</a>
+        <a href="manga.html?id=2" class="card">
+            <img src="https://cdn.myanimelist.net/images/manga/3/249658.jpg" alt="Naruto">
+            <h3>Naruto</h3>
+            <p>Masashi Kishimoto</p>
+        </a>
 
-<a href="manga.html?id=2" class="card">
-<img src="https://cdn.myanimelist.net/images/manga/3/249658.jpg" alt="Naruto">
-<h3>Naruto</h3>
-<p>Masashi Kishimoto</p>
-</a>
+        <a href="manga.html?id=3" class="card">
+            <img src="https://myanimelist.net/images/manga/1/161558.jpg" alt="Bleach">
+            <h3>Bleach</h3>
+            <p>Tite Kubo</p>
+        </a>
 
-<a href="manga.html?id=3" class="card">
-<img src="https://myanimelist.net/images/manga/1/161558.jpg" alt="Bleach">
-<h3>Bleach</h3>
-<p>Tite Kubo</p>
-</a>
+        <a href="manga.html?id=4" class="card">
+            <img src="https://www.salvat.com/34675-home_default/fairy-tail-n-22.jpg" alt="Fairy Tail">
+            <h3>Fairy Tail</h3>
+            <p>Hiro Mashima</p>
+        </a>
 
-<a href="manga.html?id=4" class="card">
-<img src="https://www.salvat.com/34675-home_default/fairy-tail-n-22.jpg" alt="Fairy Tail">
-<h3>Fairy Tail</h3>
-<p>Hiro Mashima</p>
-</a>
+        <a href="manga.html?id=5" class="card">
+            <img src="https://cdn.myanimelist.net/images/manga/2/37846.jpg" alt="Attack on Titan">
+            <h3>Attack on Titan</h3>
+            <p>Hajime Isayama</p>
+        </a>
 
-<a href="manga.html?id=5" class="card">
-<img src="https://cdn.myanimelist.net/images/manga/2/37846.jpg" alt="Attack on Titan">
-<h3>Attack on Titan</h3>
-<p>Hajime Isayama</p>
-</a>
+        <a href="manga.html?id=6" class="card">
+            <img src="https://myanimelist.net/images/manga/3/210341.jpg" alt="Jujutsu Kaisen">
+            <h3>Jujutsu Kaisen</h3>
+            <p>Gege Akutami</p>
+        </a>
 
-<a href="manga.html?id=6" class="card">
-<img src="https://myanimelist.net/images/manga/3/210341.jpg" alt="Jujutsu Kaisen">
-<h3>Jujutsu Kaisen</h3>
-<p>Gege Akutami</p>
-</a>
+        <a href="manga.html?id=7" class="card">
+            <img src="https://myanimelist.net/images/manga/1/157897.jpg" alt="Berserk">
+            <h3>Berserk</h3>
+            <p>Kentaru Miura</p>
+        </a>
 
-<a href="manga.html?id=7" class="card">
-<img src="https://myanimelist.net/images/manga/1/157897.jpg" alt="Berserk">
-<h3>Berserk</h3>
-<p>Kentaru Miura</p>
-</a>
+        <a href="manga.html?id=8" class="card">
+            <img src="https://myanimelist.net/images/manga/2/253119.jpg" alt="Hunter x Hunter">
+            <h3>Hunter x Hunter</h3>
+            <p>Yoshihiro Togashi</p>
+        </a>
 
-<a href="manga.html?id=8" class="card">
-<img src="https://myanimelist.net/images/manga/2/253119.jpg" alt="Hunter x Hunter">
-<h3>Hunter x Hunter</h3>
-<p>Yoshihiro Togashi</p>
-</a>
+        <a href="manga.html?id=9" class="card">
+            <img src="https://myanimelist.net/images/manga/3/243675.jpg" alt="Fullmetal Alchemist">
+            <h3>Fullmetal Alchemist</h3>
+            <p>Hiromu Arakawa</p>
+        </a>
 
-<a href="manga.html?id=9" class="card">
-<img src="https://myanimelist.net/images/manga/3/243675.jpg" alt="Fullmetal Alchemist">
-<h3>Fullmetal Alchemist</h3>
-<p>Hiromu Arakawa</p>
-</a>
+        <a href="manga.html?id=10" class="card">
+            <img src="https://myanimelist.net/images/manga/1/258245.jpg" alt="Death Note">
+            <h3>Death Note</h3>
+            <p>Hisashi Sugiura</p>
+        </a>
 
-<a href="manga.html?id=10" class="card">
-<img src="https://myanimelist.net/images/manga/1/258245.jpg" alt="Death Note">
-<h3>Death Note</h3>
-<p>Hisashi Sugiura</p>
-</a>
+        <a href="manga.html?id=11" class="card">
+            <img src="https://myanimelist.net/images/manga/1/267793.jpg" alt="Dragon Ball">
+            <h3>Dragon Ball</h3>
+            <p>Akira Toriyama</p>
+        </a>
 
-<a href="manga.html?id=11" class="card">
-<img src="https://myanimelist.net/images/manga/1/267793.jpg" alt="Dragon Ball">
-<h3>Dragon Ball</h3>
-<p>Akira Toriyama</p>
-</a>
+        <a href="manga.html?id=12" class="card">
+            <img src="https://myanimelist.net/images/manga/2/188925.jpg" alt="Vinland Saga">
+            <h3>Vinland Saga</h3>
+            <p>Makoto Yukimura</p>
+        </a>
 
-<a href="manga.html?id=12" class="card">
-<img src="https://myanimelist.net/images/manga/2/188925.jpg" alt="Vinland Saga">
-<h3>Vinland Saga</h3>
-<p>Makoto Yukimura</p>
-</a>
+        <a href="manga.html?id=13" class="card">
+            <img src="https://myanimelist.net/images/manga/3/258224.jpg" alt="Monster">
+            <h3>Monster</h3>
+            <p>Naoki Urasawa</p>
+        </a>
 
-<a href="manga.html?id=13" class="card">
-<img src="https://myanimelist.net/images/manga/3/258224.jpg" alt="Monster">
-<h3>Monster</h3>
-<p>Naoki Urasawa</p>
-</a>
+        <a href="manga.html?id=14" class="card">
+            <img src="https://myanimelist.net/images/manga/3/194456.jpg" alt="Tokyo Ghoul">
+            <h3>Tokyo Ghoul</h3>
+            <p>Sui Ishida</p>
+        </a>
 
-<a href="manga.html?id=14" class="card">
-<img src="https://myanimelist.net/images/manga/3/194456.jpg" alt="Tokyo Ghoul">
-<h3>Tokyo Ghoul</h3>
-<p>Sui Ishida</p>
-</a>
+        <a href="manga.html?id=15" class="card">
+            <img src="https://myanimelist.net/images/manga/1/209370.jpg" alt="Boku no Hero Academia">
+            <h3>Boku no Hero Academia</h3>
+            <p>Kohei Horikawa</p>
+        </a>
 
-<a href="manga.html?id=15" class="card">
-<img src="https://myanimelist.net/images/manga/1/209370.jpg" alt="Boku no Hero Academia">
-<h3>Boku no Hero Academia</h3>
-<p>Kohei Horikawa</p>
-</a>
+        <a href="manga.html?id=16" class="card">
+            <img src="https://myanimelist.net/images/manga/3/212094.jpg" alt="Eden's Zero">
+            <h3>Eden's Zero</h3>
+            <p>Hiro Mashima</p>
+        </a>
 
-<a href="manga.html?id=16" class="card">
-<img src="https://myanimelist.net/images/manga/3/212094.jpg" alt="Eden's Zero">
-<h3>Eden's Zero</h3>
-<p>Hiro Mashima</p>
-</a>
+        <a href="manga.html?id=17" class="card">
+            <img src="https://myanimelist.net/images/manga/2/166254.jpg" alt="Black Clover">
+            <h3>Black Clover</h3>
+            <p>Yuki Tabata</p>
+        </a>
 
-<a href="manga.html?id=17" class="card">
-<img src="https://myanimelist.net/images/manga/2/166254.jpg" alt="Black Clover">
-<h3>Black Clover</h3>
-<p>Yuki Tabata</p>
-</a>
+        <a href="manga.html?id=18" class="card">
+            <img src="https://myanimelist.net/images/manga/2/169004.jpg" alt="Pandora Hearts">
+            <h3>Pandora Hearts</h3>
+            <p>Jun Mochizuki</p>
+        </a>
 
-<a href="manga.html?id=18" class="card">
-<img src="https://myanimelist.net/images/manga/2/169004.jpg" alt="Pandora Hearts">
-<h3>Pandora Hearts</h3>
-<p>Jun Mochizuki</p>
-</a>
+        <a href="manga.html?id=19" class="card">
+            <img src="https://myanimelist.net/images/manga/3/240470.jpg" alt="DGray-man">
+            <h3>DGray-man</h3>
+            <p>Katsura Hoshino</p>
+        </a>
 
-<a href="manga.html?id=19" class="card">
-<img src="https://myanimelist.net/images/manga/3/240470.jpg" alt="DGray-man">
-<h3>DGray-man</h3>
-<p>Katsura Hoshino</p>
-</a>
+        <a href="manga.html?id=20" class="card">
+            <img src="https://myanimelist.net/images/manga/3/282487.jpg" alt="Magi">
+            <h3>Magi</h3>
+            <p>Shinobu Ohtaka</p>
+        </a>
+    </main>
 
-<a href="manga.html?id=20" class="card">
-<img src="https://myanimelist.net/images/manga/3/282487.jpg" alt="Magi">
-<h3>Magi</h3>
-<p>Shinobu Ohtaka</p>
-</a>
-</main>
-
-<script src="tabs.js" defer></script>
+    <script src="tabs.js" defer></script>
 </body>
 </html>

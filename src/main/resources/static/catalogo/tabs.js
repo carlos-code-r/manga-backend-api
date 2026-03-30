@@ -1,111 +1,97 @@
-/**
- * ARCHIVO ÚNICO: tabs.js
- * Gestiona el buscador (index.html), las pestañas y la API (manga.html)
- */
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    /* ===================== 1. BUSCADOR EN TIEMPO REAL (index.html) ===================== */
+    
+    /* ============================================================
+       1. FILTRO DE BÚSQUEDA (Para index.html)
+       ============================================================ */
     const inputBusqueda = document.getElementById("buscar-titulo");
     const tarjetasManga = document.querySelectorAll(".catalogo .card");
 
+    // Solo se ejecuta si estamos en la página que tiene el buscador
     if (inputBusqueda) {
         inputBusqueda.addEventListener("input", () => {
             const textoBuscado = inputBusqueda.value.toLowerCase().trim();
 
             tarjetasManga.forEach(tarjeta => {
                 const titulo = tarjeta.querySelector("h3").textContent.toLowerCase();
-                // Si el título incluye lo que escribes, se muestra, si no, se oculta
+                
+                // Filtro por letras: si el título contiene lo que escribes, se queda
                 if (titulo.includes(textoBuscado)) {
                     tarjeta.style.display = "flex";
-                    tarjeta.style.opacity = "1";
                 } else {
                     tarjeta.style.display = "none";
-                    tarjeta.style.opacity = "0";
                 }
             });
         });
     }
 
-    /* ===================== 2. LÓGICA DE PESTAÑAS (manga.html) ===================== */
+    /* ============================================================
+       2. LÓGICA DE PESTAÑAS (Para manga.html)
+       ============================================================ */
     const botones = document.querySelectorAll(".tabs button");
     const contenidos = document.querySelectorAll(".tab-content");
 
     if (botones.length > 0) {
-        botones.forEach(boton => {
-            boton.addEventListener("click", () => {
-                // Resetear estados activos
+        botones.forEach(btn => {
+            btn.addEventListener("click", () => {
                 botones.forEach(b => b.classList.remove("active"));
                 contenidos.forEach(c => c.classList.remove("active"));
-
-                // Activar pestaña actual
-                boton.classList.add("active");
-                const tabId = boton.dataset.tab;
-                document.getElementById(tabId)?.classList.add("active");
+                btn.classList.add("active");
+                
+                const idTab = btn.dataset.tab;
+                const targetContent = document.getElementById(idTab);
+                if (targetContent) {
+                    targetContent.classList.add("active");
+                }
             });
         });
     }
 
-    /* ===================== 3. CARGA DE DATOS API (manga.html) ===================== */
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-
-    if (id) {
-        cargarDetallesManga(id);
-        cargarCapitulos(id);
+    /* ============================================================
+       3. CARGA DE API (Para manga.html)
+       ============================================================ */
+    const id = new URLSearchParams(window.location.search).get("id");
+    if (id && document.getElementById("portada")) {
+        cargarManga(id);
     }
 });
 
-/** * Obtiene info del Manga y del Autor desde el Backend 
- */
-function cargarDetallesManga(mangaId) {
-    fetch(`http://localhost:8080/mangas/${mangaId}`)
-        .then(res => res.json())
-        .then(manga => {
-            // Datos básicos del Manga
-            document.getElementById("titulo").textContent = manga.titulo;
-            document.getElementById("descripcion-texto").textContent = manga.descripcion;
-            document.getElementById("dato-titulo").textContent = manga.titulo;
-            document.getElementById("dato-estado").textContent = manga.estado || "-";
-            document.getElementById("portada").src = manga.imagenUrl;
-            
-            if (manga.fechaPublicacion) {
-                document.getElementById("dato-anio").textContent = manga.fechaPublicacion.split("-")[0];
-            }
+async function cargarManga(id) {
+    try {
+        const res = await fetch(`http://localhost:8080/mangas/${id}`);
+        const manga = await res.json();
 
-            // Fetch anidado para obtener el Autor
-            return fetch(`http://localhost:8080/autores/${manga.autorId}`);
-        })
-        .then(res => res.json())
-        .then(autor => {
-            document.getElementById("dato-autor").textContent = autor.nombre || "-";
-            document.getElementById("dato-nacionalidad").textContent = autor.nacionalidad || "-";
-            document.getElementById("autor-bio").textContent = autor.autobiografia || "Sin información";
-        })
-        .catch(err => console.error("Error cargando detalles:", err));
-}
+        // Rellenar cabecera y descripción
+        document.getElementById("titulo").textContent = manga.titulo;
+        document.getElementById("portada").src = manga.imagenUrl;
+        document.getElementById("descripcion-texto").textContent = manga.descripcion;
+        
+        // Cuadro de datos
+        document.getElementById("dato-titulo").textContent = manga.titulo;
+        document.getElementById("dato-estado").textContent = manga.estado;
+        document.getElementById("dato-anio").textContent = manga.fechaPublicacion ? manga.fechaPublicacion.split("-")[0] : "-";
 
-/** * Obtiene la lista de capítulos del Manga 
- */
-function cargarCapitulos(mangaId) {
-    fetch(`http://localhost:8080/capitulos?mangaId=${mangaId}`)
-        .then(res => res.json())
-        .then(data => {
-            const lista = document.getElementById("lista-capitulos");
-            if (!lista) return;
+        // Autor
+        const resAutor = await fetch(`http://localhost:8080/autores/${manga.autorId}`);
+        const autor = await resAutor.json();
+        document.getElementById("autor-bio").textContent = autor.autobiografia;
+        document.getElementById("dato-autor").textContent = autor.nombre;
+        document.getElementById("dato-nacionalidad").textContent = autor.nacionalidad;
 
+        // Capítulos
+        const resCaps = await fetch(`http://localhost:8080/capitulos?mangaId=${id}`);
+        const caps = await resCaps.json();
+        const lista = document.getElementById("lista-capitulos");
+        
+        if (lista) {
             lista.innerHTML = "";
-            const capitulos = data.content || [];
-
-            if (capitulos.length > 0) {
-                capitulos.forEach(cap => {
-                    const li = document.createElement("li");
-                    li.textContent = cap.titulo;
-                    lista.appendChild(li);
-                });
-            } else {
-                lista.innerHTML = "<li>No hay capítulos disponibles</li>";
-            }
-        })
-        .catch(err => console.error("Error capítulos:", err));
+            const dataCaps = caps.content || caps;
+            dataCaps.forEach(c => {
+                const li = document.createElement("li");
+                li.textContent = c.titulo;
+                lista.appendChild(li);
+            });
+        }
+    } catch (e) { 
+        console.error("Error cargando datos:", e); 
+    }
 }
