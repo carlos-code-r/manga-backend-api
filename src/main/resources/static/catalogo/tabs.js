@@ -1,33 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
- /* ============================================================
-       0. LÓGICA DE SESIÓN (ACTUALIZADA CON ICONO Y BOTÓN)
+    /* ============================================================
+       0. LÓGICA DE SESIÓN (ACTUALIZADA CON ROLES)
        ============================================================ */
     const nombreUsuario = localStorage.getItem("nombreUsuario");
+    const rolUsuario = localStorage.getItem("rolUsuario"); // <--- CAPTURAMOS EL ROL
+    
     const panelBtn = document.getElementById("btn-panel-creador");
     const loginBtn = document.getElementById("btn-login");
     const registroBtn = document.getElementById("btn-registro");
     const authContainer = document.getElementById("auth-container");
 
     if (nombreUsuario) {
-        // 1. Mostramos el panel personalizado
+        // 1. Lógica del Panel (SOLO SI ES ADMIN)
         if (panelBtn) {
-            panelBtn.style.display = "flex"; 
-            panelBtn.innerText = `⚙️ Panel de ${nombreUsuario}`;
+            if (rolUsuario === "ADMIN") {
+                panelBtn.style.display = "flex"; 
+                panelBtn.innerText = `⚙️ Panel de ${nombreUsuario}`;
+            } else {
+                // Si es un usuario normal, nos aseguramos de que esté oculto
+                panelBtn.style.display = "none";
+            }
         }
         
         // 2. Ocultamos Iniciar Sesión y Crear Cuenta
         if (loginBtn) loginBtn.style.display = "none";       
         if (registroBtn) registroBtn.style.display = "none"; 
 
-        // 3. AQUÍ VA EL BOTÓN DE CERRAR SESIÓN CON ICONO
+        // 3. BOTÓN DE CERRAR SESIÓN (Tu código original sin cambios)
         if (authContainer && !document.getElementById("btn-logout-manual")) {
             const btnSalir = document.createElement("a");
             btnSalir.id = "btn-logout-manual";
-            
-            // Añadimos el icono y el texto
             btnSalir.innerHTML = `<span>🚪</span> Cerrar Sesión`;
-            
-            // Le damos las clases para que el CSS lo pinte bien
             btnSalir.className = "btn-auth btn-logout-rojo"; 
             btnSalir.href = "#";
 
@@ -39,6 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
             
             authContainer.appendChild(btnSalir);
         }
+    } else {
+        // Si no hay sesión, el panel debe estar oculto siempre
+        if (panelBtn) panelBtn.style.display = "none";
     }
     /* ============================================================
        2. LÓGICA DE PESTAÑAS (TABS)

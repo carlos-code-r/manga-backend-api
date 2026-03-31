@@ -20,7 +20,7 @@ body {
    ========================================= */
 .barra-lateral {
     width: 250px;
-    background-color: #1b1c5e; /* Tu azul oscuro */
+    background-color: #1b1c5e; 
     color: white;
     padding: 2rem;
     position: sticky;
@@ -78,7 +78,9 @@ body {
     color: #1b1c5e;
     font-weight: bold;
 }
-
+.enlace-usuarios {
+    display: none;
+}
 /* =========================================
    3. CABECERA Y CONTADOR 
    ========================================= */

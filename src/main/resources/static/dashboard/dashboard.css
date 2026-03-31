@@ -53,7 +53,9 @@ body {
     color: #1b1c5e;
     font-weight: bold;
 }
-
+.enlace-usuarios {
+    display: none;
+}
 /* =========================================
    3. CONTENIDO Y CABECERA
    ========================================= */

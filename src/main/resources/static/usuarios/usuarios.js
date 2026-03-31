@@ -1,3 +1,10 @@
+// COMPROBACION DE PERMISOS:
+(function comprobarPermisos() {
+    const rol = localStorage.getItem("rolUsuario");
+    if (rol !== "ADMIN") {
+        window.location.href = "../catalogo/index.html";
+    }
+})();
 const API_URL = "http://localhost:8080/usuarios";
 let paginaActual = 0;
 
