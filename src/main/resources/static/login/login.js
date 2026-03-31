@@ -48,18 +48,17 @@ form.addEventListener("submit", async (e) => {
 
     const url = esRegistro ? API_BASE : API_LOGIN;
     
-    // Construimos el objeto según tu UsuarioDto.java
+    // Al registrarse siempre es USER. Al loguearse no enviamos rol.
     const bodyData = esRegistro 
         ? { 
             usuario: usuarioValue, 
             password: passwordValue, 
             email: emailValue, 
-            rol: "ADMIN" // Enviamos el Enum en mayúsculas
+            rol: "USER" 
           } 
         : { 
             usuario: usuarioValue, 
             password: passwordValue 
-            // En login NO enviamos email para evitar el error 400 de validación
           };
 
     try {
@@ -74,15 +73,23 @@ form.addEventListener("submit", async (e) => {
                 alert("¡Cuenta creada con éxito! Ahora inicia sesión.");
                 cambiarModo('login');
             } else {
-                // ÉXITO: Guardamos sesión y vamos al Dashboard
-                localStorage.setItem("rolUsuario", "ADMIN");
-                localStorage.setItem("nombreUsuario", usuarioValue);
+                // ÉXITO EN LOGIN: Obtenemos los datos reales del servidor
+                const usuarioData = await res.json(); 
                 
-                alert("¡Bienvenido, " + usuarioValue + "!");
-                window.location.href = "../dashboard/dashboard.html"; 
+                // Guardamos en el navegador el ROL real (ADMIN o USER) que viene de la BBDD
+                localStorage.setItem("rolUsuario", usuarioData.rol);
+                localStorage.setItem("nombreUsuario", usuarioData.usuario);
+                
+                alert("¡Bienvenido, " + usuarioData.usuario + "!");
+
+                // REDIRECCIÓN SEGÚN ROL
+                if (usuarioData.rol === "ADMIN") {
+                    window.location.href = "../dashboard/dashboard.html"; 
+                } else {
+                    window.location.href = "../catalogo/index.html"; 
+                }
             }
         } else {
-            // Si el backend responde 400 (Bad Request) o 401 (Unauthorized)
             if (errorBanner) errorBanner.style.display = "block";
             const errorMsg = await res.text();
             console.error("Error desde Java:", errorMsg);
@@ -93,7 +100,6 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-// 3. INICIO: Detectar modo por URL
 window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const modo = params.get("mode");

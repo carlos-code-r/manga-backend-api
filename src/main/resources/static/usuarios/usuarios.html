@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Usuarios</title>
+    <link rel="stylesheet" href="usuarios.css">
+</head>
+<body>
+
+    <aside class="barra-lateral">
+        <h2>Dashboard</h2>
+        <nav class="menu-navegacion">
+            <a href="../dashboard/dashboard.html">🏠 Dashboard</a>
+            <a href="usuarios.html" class="activo">👥 Usuarios</a>
+            <a href="../catalogo/index.html">📚 Catalogo</a></nav>
+        </nav>
+        <button onclick="cerrarSesion()" class="btn-logout-sidebar">
+        <span>🚪</span> Cerrar Sesión
+    </button>
+    </aside>
+
+    <main class="contenido-principal">
+        
+        <header class="cabecera-seccion">
+    <div class="info-titulos">
+        <h1>Gestión de Usuarios</h1>
+        <p>Panel de control de la comunidad MangaFenrir.</p>
+    </div>
+    <div class="contador-usuarios">
+        <span class="label">TOTAL USUARIOS</span>
+        <span id="count-usuarios" class="numero">0</span>
+    </div>
+</header>
+
+<section class="seccion-tabla">
+    <table class="tabla-gestion">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Fecha Alta</th>
+                <th>Rol</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-usuarios-body">
+            </tbody>
+    </table>
+</section>
+            <div class="paginacion-container">
+                <button id="btn-ant-user" class="btn-pag" onclick="cambiarPagina(-1)">«</button>
+                <div id="paginas-numeros-user" class="paginas-numeros">
+                    </div>
+                <button id="btn-sig-user" class="btn-pag" onclick="cambiarPagina(1)">»</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="usuarios.js"></script>
+</body>
+</html>

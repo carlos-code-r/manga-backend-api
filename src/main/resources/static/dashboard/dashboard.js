@@ -42,10 +42,10 @@ async function cargarMangas(pagina) {
         
         <td>${manga.totalCapitulos || 0}</td> 
         
-        <td class="celda-acciones">
-            <button class="boton-editar" onclick="editarManga(${manga.id})">Editar</button>
-            <button class="boton-eliminar" onclick="eliminarManga(${manga.id})">Eliminar</button>
-        </td>
+<td class="celda-acciones">
+    <button class="boton-editar" onclick="editarManga(${manga.id})">Editar</button>
+    <button class="boton-eliminar" onclick="eliminarManga(${manga.id})">Eliminar</button>
+</td>
     </tr>
 `;
     });
@@ -119,4 +119,16 @@ function editarManga(id) {
 function formatearFecha(fecha) {
   if (!fecha) return "-";
   return new Date(fecha).toLocaleDateString("es-ES");
+}
+
+function activarMenu(elemento) {
+    document.querySelectorAll('.menu-navegacion a').forEach(a => a.classList.remove('activo'));
+    
+    elemento.classList.add('activo');
+}
+
+function cerrarSesion() {
+    localStorage.clear();
+    // Como estás en /dashboard/ o /usuarios/, subimos un nivel para ir a /catalogo/
+    window.location.href = "../catalogo/index.html";
 }

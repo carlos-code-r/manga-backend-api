@@ -45,6 +45,7 @@ body {
 .menu-navegacion a:hover {
     background-color: rgba(79, 172, 254, 0.1);
     color: white;
+    font-weight: bold;
 }
 
 .menu-navegacion a.activo {
@@ -73,7 +74,29 @@ body {
     color: #1b1c5e;
     font-size: 2.8rem;
 }
+.btn-logout-sidebar {
+    background-color: rgba(239, 68, 68, 0.1); 
+    color: #ff8080;
+    border: 1px dashed #ef4444; 
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto; 
+}
 
+.btn-logout-sidebar:hover {
+    background-color: #ef4444;
+    color: white;
+    border-style: solid;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
 /* Botón Añadir Manga */
 .boton-crear {
     background-color: #4facfe;
@@ -113,7 +136,7 @@ body {
     text-align: left;
     color: #475569;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 1rem;
     border-bottom: 2px solid #e2e8f0;
 }
 
@@ -137,49 +160,66 @@ body {
 /* =========================================
    5. ETIQUETAS Y BOTONES DE ACCIÓN
    ========================================= */
+
 .etiqueta {
     padding: 6px 12px;
     border-radius: 4px;
     font-size: 0.85rem;
-    font-weight: 800; /* Texto extra negrita */
+    font-weight: 800;
     text-transform: uppercase;
-    color: #ffffff !important; /* Texto blanco puro siempre */
+    color: #ffffff;
     display: inline-block;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25); /* Sombra para que "salte" de la tabla */
-    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.emision { 
-    background-color: #10b981; /* Un verde esmeralda muy potente */
-}
+.emision { background-color: #10b981; }
+.finalizado { background-color: #ef4444; }
 
-.finalizado { 
-    background-color: #ef4444; /* Rojo vibrante */
-}
-
-.boton-editar {
-    background-color: #fbbf24;
+/* ESTILO BASE PARA AMBOS BOTONES */
+.boton-editar, .boton-eliminar {
     border: none;
     padding: 8px 14px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-    margin-right: 5px;
-    transition: 0.2s;
+    display: inline-block; 
+    position: relative;    
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
+/* BOTÓN EDITAR */
+.boton-editar {
+    background-color: #fbbf24;
+    color: #451a03;
+    margin-right: 5px;
+}
+
+.boton-editar:hover {
+    background-color: #f59e0b;
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(251, 191, 36, 0.4);
+    z-index: 10;
+}
+
+/* BOTÓN ELIMINAR */
 .boton-eliminar {
     background-color: #ef4444;
     color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
 }
 
+.boton-eliminar:hover {
+    background-color: #b91c1c;
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+    z-index: 10;
+}
+
+.tabla-gestion td:last-child {
+    white-space: nowrap;
+    width: 150px;
+    text-align: center;
+}
 /* =========================================
    6. PAGINACIÓN
    ========================================= */

@@ -29,7 +29,7 @@ h1 {
 .buscador-wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     gap: 15px;
     margin-bottom: 10px;
     padding: 0 20px;
@@ -38,7 +38,7 @@ h1 {
 .auth-buttons {
     display: flex;
     gap: 10px;
-    align-items: center; /* Asegura que los botones se alineen bien */
+    align-items: center; 
 }
 
 .btn-auth {
@@ -49,6 +49,8 @@ h1 {
     border-radius: 14px;
     transition: all 0.3s ease;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
 }
 
 /* Botón Iniciar Sesión:*/
@@ -94,6 +96,39 @@ h1 {
     border-style: solid;
     color: white;
     box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+        transform: translateY(-2px);
+
+}
+
+.btn-logout-rojo {
+    text-decoration: none;
+    color: #ff8080; 
+    background: rgba(255, 77, 77, 0.1); 
+    border: 1px dashed #ff4d4d; 
+    padding: 12px 20px;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.2); 
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.3);
+}
+
+.btn-logout-rojo span {
+    font-size: 20px; 
+}
+
+
+.btn-logout-rojo:hover {
+    background: rgba(239, 68, 68, 0.3);
+    border-style: solid; 
+    color: white;
+    border-color: #ff0000; 
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); 
+    transform: translateY(-2px);
 }
 
 .buscador {

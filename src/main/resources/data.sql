@@ -1,4 +1,11 @@
--- AUTORES (Ajustados para que coincidan con tus 20 mangas)
+-- INSERTAR ADMINISTRADOR
+INSERT INTO usuario (usuario, password, email, rol) 
+VALUES ('admin', 'admin123', 'admin@manga.com', 'ADMIN');
+
+-- INSERTAR USUARIO DE PRUEBA
+INSERT INTO usuario (usuario, password, email, rol) 
+VALUES ('user', 'user123', 'user@manga.com', 'USER');
+-- AUTORES
 INSERT INTO autor (nombre, nacionalidad, fecha_nacimiento, autobiografia) VALUES
 ('Eiichiro Oda', 'Japonesa', '1975-01-01', 'Nacido en Kumamoto, desde niño quiso ser mangaka y debutó en Shonen Jump. Es conocido por el ritmo narrativo, el humor y un universo de piratas construido durante décadas en One Piece.'),
 ('Masashi Kishimoto', 'Japonesa', '1974-11-08', 'Creció fascinado por el cine y el manga; Naruto nació de su interés por ninjas y por contar la historia de un marginado que persiste. Su estilo marcó a toda una generación de lectores.'),
@@ -21,7 +28,7 @@ INSERT INTO autor (nombre, nacionalidad, fecha_nacimiento, autobiografia) VALUES
 ('Katsura Hoshino', 'Japonesa', '1977-06-26', 'Autora de fantasía oscura con exorcistas y armas vivientes; su trazo evolucionó hacia escenas más expresivas. D.Gray-man mezcla religión ficticia, horror y viajes por distintos países.'),
 ('Shinobu Ohtaka', 'Japonesa', '1977-06-26', 'Tomó inspiración en Las mil y una noches para mazmorras, política y aventuras juveniles. Magi combina humor, épica y reflexiones sobre liderazgo y esclavitud en un mundo de fantasía.');
 
--- MANGAS (CON TUS URLS DEL HTML)
+-- MANGAS
 INSERT INTO manga (titulo, descripcion, estado, autor_id, imagen_url, fecha_publicacion, total_capitulos)
 VALUES 
 ('One Piece', 'Biografía: aventura de piratas donde Monkey D. Luffy, con poderes elásticos de una fruta del diablo, recluta tripulación y navega el Grand Line en busca del legendario One Piece para ser el Rey de los Piratas. Mezcla humor, acción épica y un mundo enormemente detallado.', 'EN_PUBLICACION', 1, 'https://cdn.myanimelist.net/images/manga/2/253146.jpg', '1997-07-22',1100),
@@ -45,7 +52,7 @@ VALUES
 ('DGray-man', 'Biografía: Allen Walker, exorcista con ojo maldito, destruye Akuma para la Orden Negra frente al Conde del Milenio. Mezcla religiosidad, horror y batallas con la Inocencia.', 'FINALIZADO', 19, 'https://myanimelist.net/images/manga/3/240470.jpg', '2004-08-07', 400),
 ('Magi', 'Biografía: Aladdin, mago con djinn en la flauta, conoce a Alibaba y a Morgiana y exploran mazmorras inspiradas en Las mil y una noches. Aventura política y mágica con reinos y los elegidos Magi.', 'FINALIZADO', 20, 'https://cdn.myanimelist.net/images/manga/3/282487.jpg', '2010-08-07', 400);
 
--- CAPITULOS: 10 por manga, numerados 1-10; títulos alineados con el inicio de cada obra (arcos/personajes propios de ese manga).
+-- CAPITULOS: 
 INSERT INTO capitulo (titulo, numero_capitulo, manga_id) VALUES 
 -- Manga 1: One Piece
 ('Capítulo 1: Romance Dawn', 1, 1), ('Capítulo 2: El chico del sombrero de paja', 2, 1), ('Capítulo 3: Zoro el cazador de piratas', 3, 1), ('Capítulo 4: El Capitán Morgan', 4, 1), ('Capítulo 5: El Rey de los Piratas', 5, 1), ('Capítulo 6: La primera tripulación', 6, 1), ('Capítulo 7: Buggy el payaso', 7, 1), ('Capítulo 8: La chica ladrona', 8, 1), ('Capítulo 9: El demonio del mar', 9, 1), ('Capítulo 10: La promesa', 10, 1),

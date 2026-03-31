@@ -1,42 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
-    /* ============================================================
-       0. LÓGICA DE SESIÓN (LOGIN/REGISTRO/PANEL)
+ /* ============================================================
+       0. LÓGICA DE SESIÓN (ACTUALIZADA CON ICONO Y BOTÓN)
        ============================================================ */
-    // IMPORTANTE: Usamos "rolUsuario" y "ADMIN" para que coincida con login.js
-    const esAdmin = localStorage.getItem("rolUsuario") === "ADMIN";
     const nombreUsuario = localStorage.getItem("nombreUsuario");
-
     const panelBtn = document.getElementById("btn-panel-creador");
     const loginBtn = document.getElementById("btn-login");
     const registroBtn = document.getElementById("btn-registro");
+    const authContainer = document.getElementById("auth-container");
 
-    if (esAdmin) {
+    if (nombreUsuario) {
+        // 1. Mostramos el panel personalizado
         if (panelBtn) {
-            panelBtn.style.display = "flex"; // Muestra el botón de engranaje
-            panelBtn.innerText = `⚙️ Panel de ${nombreUsuario || 'Admin'}`;
+            panelBtn.style.display = "flex"; 
+            panelBtn.innerText = `⚙️ Panel de ${nombreUsuario}`;
         }
-        if (loginBtn) loginBtn.style.display = "none";       // Oculta Login
-        if (registroBtn) registroBtn.style.display = "none"; // Oculta Registro
+        
+        // 2. Ocultamos Iniciar Sesión y Crear Cuenta
+        if (loginBtn) loginBtn.style.display = "none";       
+        if (registroBtn) registroBtn.style.display = "none"; 
+
+        // 3. AQUÍ VA EL BOTÓN DE CERRAR SESIÓN CON ICONO
+        if (authContainer && !document.getElementById("btn-logout-manual")) {
+            const btnSalir = document.createElement("a");
+            btnSalir.id = "btn-logout-manual";
+            
+            // Añadimos el icono y el texto
+            btnSalir.innerHTML = `<span>🚪</span> Cerrar Sesión`;
+            
+            // Le damos las clases para que el CSS lo pinte bien
+            btnSalir.className = "btn-auth btn-logout-rojo"; 
+            btnSalir.href = "#";
+
+            btnSalir.onclick = (e) => {
+                e.preventDefault();
+                localStorage.clear(); 
+                window.location.href = "index.html"; 
+            };
+            
+            authContainer.appendChild(btnSalir);
+        }
     }
-
     /* ============================================================
-       1. FILTRO DE BÚSQUEDA (index.html)
-       ============================================================ */
-    const inputBusqueda = document.getElementById("buscar-titulo");
-    const tarjetasManga = document.querySelectorAll(".catalogo .card");
-
-    if (inputBusqueda) {
-        inputBusqueda.addEventListener("input", () => {
-            const textoBuscado = inputBusqueda.value.toLowerCase().trim();
-            tarjetasManga.forEach(tarjeta => {
-                const titulo = tarjeta.querySelector("h3").textContent.toLowerCase();
-                tarjeta.style.display = titulo.includes(textoBuscado) ? "flex" : "none";
-            });
-        });
-    }
-
-    /* ============================================================
-       2. LÓGICA DE PESTAÑAS (manga.html)
+       2. LÓGICA DE PESTAÑAS (TABS)
        ============================================================ */
     const botones = document.querySelectorAll(".tabs button");
     const contenidos = document.querySelectorAll(".tab-content");
@@ -50,18 +55,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 const idTab = btn.dataset.tab;
                 const targetContent = document.getElementById(idTab);
-                if (targetContent) targetContent.classList.add("active");
+                if (targetContent) {
+                    targetContent.classList.add("active");
+                }
             });
         });
     }
 
     /* ============================================================
-       3. CARGA DE API (manga.html)
+       3. CARGA DE DATOS DESDE LA API
        ============================================================ */
     const params = new URLSearchParams(window.location.search);
     const idManga = params.get("id");
     
-    // Solo cargamos si hay ID y estamos en la página de detalle
     if (idManga && document.getElementById("portada")) {
         cargarManga(idManga);
     }
@@ -76,40 +82,40 @@ async function cargarManga(id) {
         if (!res.ok) throw new Error("Manga no encontrado");
         const manga = await res.json();
 
-        // Rellenar cabecera y descripción
-        document.getElementById("titulo").textContent = manga.titulo;
-        document.getElementById("portada").src = manga.imagenUrl || 'https://via.placeholder.com/200x300';
-        document.getElementById("descripcion-texto").textContent = manga.descripcion;
+        if(document.getElementById("titulo")) document.getElementById("titulo").textContent = manga.titulo;
+        if(document.getElementById("portada")) document.getElementById("portada").src = manga.imagenUrl || 'https://via.placeholder.com/200x300';
+        if(document.getElementById("descripcion-texto")) document.getElementById("descripcion-texto").textContent = manga.descripcion;
         
-        // Cuadro de datos
-        document.getElementById("dato-titulo").textContent = manga.titulo;
-        document.getElementById("dato-estado").textContent = manga.estado;
-        document.getElementById("dato-anio").textContent = manga.fechaPublicacion ? manga.fechaPublicacion.split("-")[0] : "-";
+        if(document.getElementById("dato-titulo")) document.getElementById("dato-titulo").textContent = manga.titulo;
+        if(document.getElementById("dato-estado")) document.getElementById("dato-estado").textContent = manga.estado;
+        if(document.getElementById("dato-anio")) document.getElementById("dato-anio").textContent = manga.fechaPublicacion ? manga.fechaPublicacion.split("-")[0] : "-";
 
-        // Cargar Autor (si existe autorId)
         if (manga.autorId) {
             const resAutor = await fetch(`http://localhost:8080/autores/${manga.autorId}`);
-            const autor = await resAutor.json();
-            document.getElementById("autor-bio").textContent = autor.autobiografia;
-            document.getElementById("dato-autor").textContent = autor.nombre;
-            document.getElementById("dato-nacionalidad").textContent = autor.nacionalidad;
+            if (resAutor.ok) {
+                const autor = await resAutor.json();
+                if(document.getElementById("autor-bio")) document.getElementById("autor-bio").textContent = autor.autobiografia;
+                if(document.getElementById("dato-autor")) document.getElementById("dato-autor").textContent = autor.nombre;
+                if(document.getElementById("dato-nacionalidad")) document.getElementById("dato-nacionalidad").textContent = autor.nacionalidad;
+            }
         }
 
-        // Cargar Capítulos
         const resCaps = await fetch(`http://localhost:8080/capitulos?mangaId=${id}`);
-        const caps = await resCaps.json();
-        const lista = document.getElementById("lista-capitulos");
-        
-        if (lista) {
-            lista.innerHTML = "";
-            const dataCaps = caps.content || caps;
-            dataCaps.forEach(c => {
-                const li = document.createElement("li");
-                li.textContent = c.titulo;
-                lista.appendChild(li);
-            });
+        if (resCaps.ok) {
+            const caps = await resCaps.json();
+            const lista = document.getElementById("lista-capitulos");
+            
+            if (lista) {
+                lista.innerHTML = "";
+                const dataCaps = caps.content || caps;
+                dataCaps.forEach(c => {
+                    const li = document.createElement("li");
+                    li.textContent = c.titulo;
+                    lista.appendChild(li);
+                });
+            }
         }
     } catch (e) { 
-        console.error("Error cargando datos:", e); 
+        console.error("Error cargando datos del manga:", e); 
     }
 }
